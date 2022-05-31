@@ -1,0 +1,30 @@
+<div class="container mt-4">
+    <div class="post-comic">
+        <div class="post-comic-label">
+            Đăng truyện mới
+        </div>
+        <form method="POST" action="admin/create">
+            <div class="form-group">
+                <label for="name">Tên truện</label>
+                <input type="text" class="form-control" id="name" name="name">
+            </div>
+            <div class="form-group">
+                <label for="urlImage">Link ảnh mô tả</label>
+                <input type="text" class="form-control" id="urlImage" name="urlImage">
+            </div>
+            <div class="form-group">
+                <label for="chapters">Chapter</label>
+                <input type="text" class="form-control" id="chapters" name="chapters">
+            </div>
+            <div class="form-group">
+                <label for="author">Tác giả</label>
+                <input type="text" class="form-control" id="author" name="author">
+            </div>
+            <div class="form-group">
+                <label for="content">Nội dung</label>
+                <textarea  type="text" class="form-control" id="content" name="content"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Create</button>
+        </form>
+    </div>
+</div>

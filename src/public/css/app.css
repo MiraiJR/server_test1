@@ -1,0 +1,146 @@
+h1 {
+  color: blue; }
+
+.swiper {
+  width: 100%;
+  min-height: 100px; }
+
+#app {
+  background-color: aqua;
+  background-image: url("https://images.fineartamerica.com/images/artworkimages/mediumlarge/1/abstract-vector-seamless-pattern-mosaic-of-wire-hexagons-outlines-on-white-background-simple-retro-design-wallpaper-petr-polak.jpg");
+  background-repeat: repeat; }
+
+.container {
+  padding: 0; }
+
+.container-slider {
+  background-color: black;
+  color: white;
+  border-radius: 10px;
+  margin: 50px 0;
+  padding: 0 10px; }
+
+.slider-comic-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative; }
+
+.slider-comic-item > img {
+  display: block;
+  width: 250px;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 10px; }
+
+.swiper {
+  height: 430px; }
+
+.slider-comic-item-chapter {
+  text-align: center;
+  padding: 10px 0;
+  width: 250px;
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7));
+  position: absolute;
+  top: 0%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px; }
+
+.slider-comic-item-name {
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 16px;
+  line-height: 20px;
+  height: 40px;
+  overflow-y: hidden; }
+
+.container-slider-label {
+  color: white;
+  padding: 10px;
+  font-size: 25px;
+  line-height: 25px;
+  border-bottom: 1px solid white;
+  margin-bottom: 20px; }
+
+.post-comic {
+  background-color: black;
+  color: white;
+  border-radius: 10px;
+  margin: 50px 0;
+  padding: 20px 30px; }
+
+.post-comic-label {
+  text-transform: uppercase;
+  text-align: center; }
+
+.container-comic {
+  background-color: black;
+  border-radius: 10px;
+  color: white;
+  padding: 0 20px; }
+
+.list-comic {
+  margin-top: 30px; }
+
+.comic-item {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+  position: relative;
+  margin-bottom: 40px; }
+
+.comic-item-image {
+  width: 170px;
+  height: 230px;
+  object-fit: cover; }
+
+.comic-item-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  /* number of lines to show */
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  color: white; }
+
+.comic-item-chapter {
+  color: white;
+  width: 100%;
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.03), rgba(0, 0, 0, 0.7));
+  padding: 10px 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0; }
+
+.col-3 {
+  margin: 0;
+  padding: 0; }
+
+.container-comic-label {
+  padding: 15px 0;
+  border-bottom: 1px solid white; }
+
+.container-comic-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 0; }
+
+.btn-modified {
+  margin: 0 5px; }
+
+#scroll-top {
+  opacity: 0;
+  cursor: pointer;
+  position: fixed;
+  bottom: 5%;
+  left: 5%;
+  transition: opacity 1s linear; }
+
+#scroll-top > svg {
+  height: 50px;
+  width: 50px; }
