@@ -1,0 +1,28 @@
+@media (min-width: 769px) and (max-width: 1024px) {
+  .hide-on-tablet {
+    display: none; }
+  .slider-comic-item > img {
+    height: 300px;
+    width: 200px; } }
+
+@media (min-width: 601px) and (max-width: 768px) {
+  .hide-on-medium-tablet {
+    display: none; }
+  .slider-comic-item > img {
+    height: 300px;
+    width: 200px; } }
+
+@media (min-width: 376px) and (max-width: 600px) {
+  .hide-on-mobile {
+    display: none; }
+  .slider-comic-item > img {
+    height: 300px;
+    width: 200px; } }
+
+@media (max-width: 375px) {
+  .hide-on-mobile {
+    display: none; }
+  .slider-comic-item > img {
+    display: none;
+    height: 150px;
+    width: 100px; } }
