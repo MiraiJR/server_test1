@@ -11,7 +11,7 @@ const route = require('./routes')
 db.connectDB()
 
 const app = express()
-const port = 3000
+const port = process.env.port || 3000
 
 // cấu hình sử dụng file tinh
 app.use('/comic', express.static(__dirname + '/public'))
