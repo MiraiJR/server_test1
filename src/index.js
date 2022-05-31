@@ -11,7 +11,6 @@ const route = require('./routes')
 db.connectDB()
 
 const app = express()
-const port = process.env.port || 3000
 
 // cấu hình sử dụng file tinh
 app.use('/comic', express.static(__dirname + '/public'))
@@ -34,6 +33,7 @@ app.set('views', path.join(__dirname, 'resources/views'))
 // định nghĩa route
 route(app)
 
-app.listen(port, () => {
-  console.log(`App listening on port ${port}`)
-})
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Our app is running on port ${ PORT }`);
+});
