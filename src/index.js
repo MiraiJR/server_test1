@@ -14,6 +14,7 @@ const app = express()
 
 // cấu hình sử dụng file tinh
 app.use('/comic', express.static(__dirname + '/public'))
+app.use('/genre', express.static(__dirname + '/public'))
 app.use(express.static(path.join(__dirname, 'public'))) 
 
 //middleware

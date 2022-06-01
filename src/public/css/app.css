@@ -59,8 +59,6 @@ h1 {
 .container-slider-label {
   color: white;
   padding: 10px;
-  font-size: 25px;
-  line-height: 25px;
   border-bottom: 1px solid white;
   margin-bottom: 20px; }
 
@@ -131,7 +129,15 @@ h1 {
   margin: 10px 0; }
 
 .btn-modified {
-  margin: 5px 5px; }
+  margin: 5px 5px;
+  background-color: #df691a;
+  color: white;
+  border: 1px white solid;
+  border-radius: 5px; }
+
+.btn-modified:hover {
+  color: black;
+  border: 1px black solid; }
 
 #scroll-top {
   opacity: 0;
@@ -139,7 +145,8 @@ h1 {
   position: fixed;
   bottom: 5%;
   left: 5%;
-  transition: opacity 1s linear; }
+  transition: opacity 1s linear;
+  color: black; }
 
 #scroll-top > svg {
   height: 50px;
@@ -167,3 +174,24 @@ h1 {
   -webkit-align-items: center;
   align-items: center;
   z-index: 10; }
+
+#footer {
+  background-color: darkslategray;
+  padding: 30px 20px;
+  color: white; }
+
+.footer-item {
+  display: flex;
+  flex-direction: column; }
+
+.footer-image {
+  width: 50px;
+  margin-bottom: 10px; }
+
+.swiper-pagination > .swiper-pagination-bullet {
+  opacity: 1;
+  border: white solid 1px;
+  background-color: transparent; }
+
+.swiper-pagination > .swiper-pagination-bullet-active {
+  background-color: white; }

@@ -12,7 +12,8 @@ const Comic = new Schema({
     genre: {type: String, default: 'Đang cập nhật'},
     author: {type: String, minlength: 1, default: 'Đang cập nhật'},
     slug: {type: String, slug: 'name', unique: true },
-    content: {type: String}
+    content: {type: String},
+    country: {type: String, default: 'Nhật Bản'}
 });
 
 module.exports = mongoose.model('Comic', Comic)

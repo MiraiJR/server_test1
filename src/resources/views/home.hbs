@@ -2,12 +2,12 @@
     <div class="row">
         <div class="col">
             <div class="container-slider">
-                <h1 class="container-slider-label">
+                <div class="container-slider-label">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-tablet-landscape-fill" viewBox="0 0 16 16" style="margin-right: 10px;">
                         <path d="M2 14a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2zm11-7a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
                     </svg>
                     Truyện mới hằng ngày
-                </h1>
+                </div>
                 <div class="swiper mySwiper">
                     <div class="swiper-wrapper">
                         {{#each comics}}
@@ -33,7 +33,7 @@
     </div>
 </div>
 
-<div class="container" style="margin: 50px 0">
+<div class="container">
     <div class="row">
         <div class="col-12 col-lg-12 col-xl-8">
             <div class="container-comic">
@@ -44,9 +44,9 @@
                     Truyện mới cập nhật
                 </div>
                 <div class="container-comic-button">
-                    <button type="button" class="btn btn-modified">Truyện Nhật</button>
-                    <button type="button" class="btn btn-modified">Truyện Trung</button>
-                    <button type="button" class="btn btn-modified">Truyện Hàn</button>
+                    <a href="genre/manga" class="btn btn-modified">Truyện Nhật</a>
+                    <a href="genre/manhua" class="btn btn-modified">Truyện Trung</a>
+                    <a href="genre/manhwa" class="btn btn-modified">Truyện Hàn</a>
                 </div>
                 <div class="list-comic">
                     <div class="row">
@@ -103,12 +103,12 @@
                 delay: 2000,
             },
             pagination: {
-            el: ".swiper-pagination",
-            clickable: true,
+                el: ".swiper-pagination",
+                clickable: true,
             },
             navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
             },
         });
     }
@@ -123,12 +123,12 @@
                 delay: 2000,
             },
             pagination: {
-            el: ".swiper-pagination",
-            clickable: true,
+                el: ".swiper-pagination",
+                clickable: true,
             },
             navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
             },
         });
     } --}}
@@ -143,12 +143,12 @@
                 delay: 2000,
             },
             pagination: {
-            el: ".swiper-pagination",
-            clickable: true,
+                el: ".swiper-pagination",
+                clickable: true,
             },
             navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
             },
         });
     }
@@ -163,12 +163,12 @@
                 delay: 2000,
             },
             pagination: {
-            el: ".swiper-pagination",
-            clickable: true,
+                el: ".swiper-pagination",
+                clickable: true,
             },
             navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
             },
         });
     }
@@ -183,12 +183,12 @@
                 delay: 2000,
             },
             pagination: {
-            el: ".swiper-pagination",
-            clickable: true,
+                el: ".swiper-pagination",
+                clickable: true,
             },
             navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
             },
         });
     }
