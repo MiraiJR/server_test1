@@ -195,3 +195,54 @@ h1 {
 
 .swiper-pagination > .swiper-pagination-bullet-active {
   background-color: white; }
+
+.breadcrumb {
+  background-color: #464646;
+  color: white;
+  padding: 0;
+  margin: 0;
+  overflow: hidden; }
+
+.breadcrumb-item + .breadcrumb-item::before {
+  display: none; }
+
+.breadcrumb-item {
+  padding: 15px 0;
+  padding-left: 20px;
+  padding-right: 30px;
+  height: 100%;
+  position: relative; }
+
+.breadcrumb-item:first-child {
+  background-color: green; }
+  .breadcrumb-item:first-child .triangle {
+    border-left: 30px solid green; }
+
+.breadcrumb-item:last-child .triangle {
+  border-left: 30px solid #df691a; }
+
+.triangle {
+  width: 0;
+  height: 0;
+  border-top: 30px solid transparent;
+  border-left: 30px solid #464646;
+  border-bottom: 30px solid transparent;
+  position: absolute;
+  top: 0;
+  right: -30px;
+  z-index: 1000; }
+
+.breadcrumb-item > a {
+  color: white;
+  margin-left: 20px; }
+
+.breadcrumb-item:hover {
+  background-color: #df691a; }
+  .breadcrumb-item:hover .triangle {
+    border-left: 30px solid #df691a; }
+
+#breadcrumb-name-genre {
+  text-transform: capitalize; }
+
+.breadcrumb-item-active {
+  background-color: #df691a; }

@@ -1,3 +1,20 @@
+<div class="container mt-4">
+    <ul class="breadcrumb">
+        <li id="breadcrumb-item-home" class="breadcrumb-item">
+            <a onclick="return buildURLOrigin(this)" href="">Home</a>
+            <div class="triangle"></div>
+        </li>
+        <li id="breadcrumb-item-list" class="breadcrumb-item d-none d-sm-block d-lg-block">
+            <a onclick="return buildUrlListComic(this)" href="#">Danh sách truyện</a>
+            <div class="triangle"></div>
+        </li>
+        <li id="breadcrumb-item-genre" class="breadcrumb-item breadcrumb-item-active">
+            <a id="breadcrumb-name-genre" href="#"></a>
+            <div class="triangle"></div>
+        </li>
+    </ul>
+</div>
+
 <div class="container">
     <div class="row">
         <div class="col-12 col-lg-12 col-xl-8">
@@ -44,9 +61,36 @@
 </div>
 
 <script>
+    function buildURLOrigin(item) {
+        item.href = window.location.origin
+        return true
+    }
+
+    function buildUrlListComic(item) {
+        item.href = `${window.location.origin}/list-comic`
+        return true
+    }
+
     function buildURL(item, slug)
     {   
-        item.href=`${window.location.origin}/comic/${slug}`;
-        return true;
+        item.href=`${window.location.origin}/comic/${slug}`
+        return true
     }
+
+    function getNameGenreFromUrl() {
+        var curUrl = window.location.href
+        let getSlugFromCurUrl = Url => new URL(Url).pathname.match(/[^\/]+/g)
+
+        nameGenre = getSlugFromCurUrl(curUrl)[1]
+
+        if(typeof nameGenre == 'undefined')
+        {
+            document.getElementById('breadcrumb-item-genre').remove()
+            document.getElementById('breadcrumb-item-list').classList.add('breadcrumb-item-active')
+        }
+        document.getElementById('breadcrumb-name-genre').innerHTML = nameGenre
+    }
+
+    getNameGenreFromUrl()
+
 </script>
