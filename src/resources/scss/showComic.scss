@@ -100,3 +100,74 @@
 .facebook-plugin > iframe {
     margin-top: 20px;
 }
+
+.comic-item-chapterDetail-father {
+    max-height: 100px;
+    overflow: hidden;
+}
+
+.comic-item-chapterDetail {
+    display: block;
+    text-align: left;
+    color: white;
+    font-size: 14px;
+    line-height: 25px;
+    overflow: hidden;
+}
+
+.comic-detail-chapter-label {
+    padding: 10px;
+    border-bottom: 1px solid white;
+    border-top: 1px solid white;
+    font-weight: 600;
+}
+
+.comic-detail-chapter-list {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.comic-detail-chapter-item {
+    width: 100%;
+    padding: 5px;
+    border-bottom: 1px solid white;
+    color: white;
+}
+
+.comic-detail-chapter-item:hover {
+    text-decoration: none;
+    background-color: chocolate;
+    transition: background-color 0.5s linear;
+    color: black;
+}
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    padding: 40px;
+    background-color: black;
+    color: white;
+    margin: 30px 0;
+}
+
+.navigation > i {
+    font-size: 30px;
+}
+
+
+.navigation > i:last-child {
+    margin-right: 200px;
+}
+
+.navigation > i:first-child {
+    margin-left: 200px;
+}
+
+.chapter-comic-image {
+    text-align: center;
+    background-color: #000000;
+    padding: 10px 0;
+    margin-bottom: 50px;
+}

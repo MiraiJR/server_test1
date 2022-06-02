@@ -3,7 +3,7 @@
         <div class="post-comic-label">
             Đăng truyện mới
         </div>
-        <form method="POST" action="admin/create">
+        <form onclick="return builderUrlForFrom(this)" method="POST" action="">
             <div class="form-group">
                 <label for="name">Tên truện</label>
                 <input type="text" class="form-control" id="name" name="name">
@@ -13,10 +13,6 @@
                 <input type="text" class="form-control" id="urlImage" name="urlImage">
             </div>
             <div class="form-group">
-                <label for="chapters">Chapter</label>
-                <input type="text" class="form-control" id="chapters" name="chapters">
-            </div>
-            <div class="form-group">
                 <label for="author">Tác giả</label>
                 <input type="text" class="form-control" id="author" name="author">
             </div>
@@ -24,7 +20,6 @@
                 <label for="content">Nội dung</label>
                 <textarea  type="text" class="form-control" id="content" name="content"></textarea>
             </div>
-
             <div>
                 <label style="display: block;">Quốc gia</label>
                 <div class="form-check form-check-inline">
@@ -42,5 +37,34 @@
             </div>
             <button type="submit" class="btn btn-primary mt-4">Create</button>
         </form>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each comics}}
+                <tr>
+                    <td>{{this.name}}</td>
+                    <td>
+                        <a href="/admin/{{this._id}}/edit" class="btn btn-link">Sửa</a>
+                        <a href="" class="btn btn-link">Xóa</a>
+                    </td>
+                </tr>
+                {{/each}}
+                
+            </tbody>
+        </table>
     </div>
 </div>
+
+<script>
+    function builderUrlForFrom(item) {
+        item.action = `${window.location.origin}/admin/create`
+        return true
+    }
+</script>

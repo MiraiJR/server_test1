@@ -62,9 +62,13 @@
                                     <a href="" class="comic-item-chapter">
                                         Chapter {{this.chapters}}
                                     </a>
-                                    {{!-- <div class="comic-item-timeUpdate">
-                                        2 giờ
-                                    </div> --}}
+                                    <div class="comic-item-chapterDetail-father">
+                                        {{#each this.detailChapters}}
+                                            <a onclick="return buildUrlForDetailChaper(this, `{{this.slug}}`, `{{this.chapterNumber}}`)" href="#" class="comic-item-chapterDetail">
+                                                Chapter {{this.chapterNumber}}
+                                            </a>
+                                        {{/each}}
+                                    </div>
                                 </div>
                             </div>
                         {{/each}}
@@ -85,6 +89,13 @@
         </div>
     </div>
 </div>
+
+<script>
+    function buildUrlForDetailChaper(item, slug, chapter) {
+        item.href = `${window.location.origin}/comic/${slug}/${chapter}`
+        return true
+    }
+</script>
 
 <script type="module">
     import Swiper from 'https://unpkg.com/swiper@8/swiper-bundle.esm.browser.min.js'
