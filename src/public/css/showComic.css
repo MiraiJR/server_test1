@@ -133,14 +133,12 @@
 .navigation > i {
   font-size: 30px; }
 
-.navigation > i:last-child {
-  margin-right: 200px; }
-
-.navigation > i:first-child {
-  margin-left: 200px; }
-
-.chapter-comic-image {
+#chapter-comic-image {
   text-align: center;
   background-color: #000000;
   padding: 10px 0;
   margin-bottom: 50px; }
+
+#chapter-comic-image > img {
+  max-width: 100%;
+  object-fit: contain; }
