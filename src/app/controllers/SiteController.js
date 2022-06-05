@@ -7,7 +7,9 @@ class SiteController {
             .then(comics => res.render('home', {
                 comics: mutipleMongooseToObject(comics)
             }))
-            .catch(next)
+            .catch(() => {
+                res.render('error/error')
+            })
     }
 }
 

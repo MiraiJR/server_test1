@@ -1,5 +1,11 @@
 <div class="container mt-4">
     <div class="post-comic">
+        {{#if message}}
+        <div class="alert alert-{{message}}">
+            <button type="button" name="close" data-dismiss="alert">&times;</button>
+            <strong>{{message}}</strong>
+        </div>
+        {{/if}}
         <div class="post-comic-label">
             Đăng truyện mới
         </div>
@@ -38,7 +44,7 @@
             <button type="submit" class="btn btn-primary mt-4">Create</button>
         </form>
 
-        <table class="table">
+        <table class="table" style="color: white;">
             <thead>
                 <tr>
                     <th scope="col">Name</th>
@@ -52,7 +58,8 @@
                     <td>{{this.name}}</td>
                     <td>
                         <a href="/admin/{{this._id}}/edit" class="btn btn-link">Sửa</a>
-                        <a href="" class="btn btn-link">Xóa</a>
+                        <a href="" class="btn btn-link" data-toggle="modal" data-id="{{this._id}}" data-target="#delete-comic-model">Xóa</a>
+                        <a href="" class="btn btn-link" data-toggle="modal" data-id="{{this._id}}" data-target="#update-comic-model">Cập nhật</a>
                     </td>
                 </tr>
                 {{/each}}
@@ -62,9 +69,86 @@
     </div>
 </div>
 
+<!-- Modal -->
+<div id="delete-comic-model" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Xóa truyện</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Bạn có chắc chắn muốn xóa truyện này không?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="btn-delete-comic" class="btn btn-danger">Yes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="update-comic-model" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cập nhật truyện</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Bạn có chắc chắn muốn cập nhật truyện này không?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="btn-update-comic" class="btn btn-danger">Yes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<form name="delete-comic-form" method="POST" action=""></form>
+<form name="update-comic-form" method="POST" action=""></form>
+
+
 <script>
     function builderUrlForFrom(item) {
         item.action = `${window.location.origin}/admin/create`
         return true
     }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var comicId
+        var deleteForm = document.forms['delete-comic-form']
+        var btnDeleteComic = document.getElementById('btn-delete-comic')
+
+        $('#delete-comic-model').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget) 
+            comicId = button.data('id') 
+        })
+
+        btnDeleteComic.onclick = () => {
+            deleteForm.action = `/admin/${comicId}?_method=DELETE`
+            deleteForm.submit()
+        }
+    })
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var comicId
+        var deleteForm = document.forms['update-comic-form']
+        var btnDeleteComic = document.getElementById('btn-update-comic')
+
+        $('#update-comic-model').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget) 
+            comicId = button.data('id') 
+        })
+
+        btnDeleteComic.onclick = () => {
+            deleteForm.action = `/admin/${comicId}?_method=PUT`
+            deleteForm.submit()
+        }
+    })
 </script>

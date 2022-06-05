@@ -1,38 +1,45 @@
 const Comic = require('../models/Comic')
-const { mongooseToObject } = require('../../util/mongoose');
+const { mongooseToObject, mutipleMongooseToObject } = require('../../util/mongoose');
+const axios = require('axios')
+const cheerio = require('cheerio')
 
 class ComicController {
     showComic(req, res, next) {
-        // res.render('comic/showComic')
         Comic.findOne(req.params)
             .then((comic) => {
                 res.render('comic/showComic', {
                     comic: mongooseToObject(comic),
                 })
             })
-            .catch(next)
+            .catch(() => {
+                res.render('error/error')
+            })
     }
 
     showChapter(req, res, next) {
-        // res.json(req.params)
         Comic.findOne({slug: req.params.slug})
             .then((comic) => {
-                // res.send(Number(req.params.number))
+                const listChapters = comic.detailChapter
                 var chapter
-                for (let i = 0; i < comic.detailChapters.length; i++) {
-                    if(comic.detailChapters[i].chapterNumber == req.params.number){
-                        chapter = comic.detailChapters[i]
+                for (let i = 0; i < comic.detailChapter.length; i++) {
+                    if(comic.detailChapter[i].slugChapter == req.params.slugChapter){
+                        chapter = comic.detailChapter[i]
                     }
                 }
-                res.render('comic/showChapter', {
-                    chapter: mongooseToObject(chapter),
+                axios.get(chapter.linkImage).then(function(response) {
+                    var $ = cheerio.load(response.data)
+                    var listImageChapter = []
+                    var listItem = $('.lazy').each(function(i, elem) {
+                        listImageChapter.push($(elem).attr('data-src'))
+                    })
+                    res.render('comic/showChapter', {
+                        chapter: mongooseToObject(chapter), listImageChapter, listChapters: mutipleMongooseToObject(listChapters)
+                    })
                 })
-                // res.render('comic/showComic', {
-                //     comic: mongooseToObject(comic),
-                // })
             })
-            .catch(next)
-        // res.render('comic/showChapter')
+            .catch(() => {
+                res.render('error/error')
+            })
     }
 }
 

@@ -7,7 +7,9 @@ class GenreController {
             .then(comics => res.render('comic/showGenre', {
                 comics: mutipleMongooseToObject(comics)
             }))
-            .catch(next)
+            .catch(() => {
+                res.render('error/error')
+            })
     }
 }
 

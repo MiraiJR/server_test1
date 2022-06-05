@@ -45,21 +45,24 @@
                                 {{comic.content}}
                             </div>
                         </div>
-                        <div class="more-state show-more-content" onclick="showMore()">
+                        <div class="more-state show-more-content" onclick="showMoreContent()">
                             Xem thêm
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="comic-detail-chapter-label">
-                            Danh sách chương ({{comic.detailChapters.length}})
+                            Danh sách chương ({{comic.detailChapter.length}})
                         </div>
-                        {{#each comic.detailChapters}}
-                            <ul class="comic-detail-chapter-list">
-                                <a href="{{this.slug}}/{{this.chapterNumber}}" class="comic-detail-chapter-item">
-                                    Chapter {{this.chapterNumber}}
-                                </a>
-                            </ul>
+                        <ul class="comic-detail-chapter-list">
+                        {{#each comic.detailChapter}}
+                            <a href="/comic/{{this.slugComic}}/{{this.slugChapter}}" class="comic-detail-chapter-item">
+                                {{this.name}}
+                            </a>
                         {{/each}}
+                        </ul>
+                        <div class="more-state show-more-chapter" onclick="showMoreChapter()">
+                            Xem thêm
+                        </div>
                     </div>
                 </div>
             </div>
@@ -81,7 +84,7 @@
 <script>
 
     // điều kiện để xem thêm xuất hiện
-    function showMoreAppear(){
+    function showMoreAppearInContent(){
         var divContentComic = document.querySelector('.comic-detail-content-clearly').offsetHeight
         if (divContentComic == 50)
         {
@@ -90,10 +93,20 @@
             document.querySelector('.show-more-content').style.display = 'none'
         }
     }
-    showMoreAppear()
+    function showMoreAppearInChapter(){
+        var divContentComic = document.querySelector('.comic-detail-chapter-list').offsetHeight
+        if (divContentComic == 500)
+        {
+            document.querySelector('.show-more-chapter').style.display = 'flex'
+        }else {
+            document.querySelector('.show-more-chapter').style.display = 'none'
+        }
+    }
+    showMoreAppearInChapter()
+    showMoreAppearInContent()
 
     // xem thêm -> ẩn đi
-    function showMore() {
+    function showMoreContent() {
         var eleShowMore = document.querySelector('.show-more-content')
         var statusShowMore = eleShowMore.classList[0]
         if (statusShowMore == 'more-state')
@@ -103,6 +116,23 @@
             eleShowMore.classList.replace('more-state', 'less-state')
         }else {
             document.querySelector('.comic-detail-content-clearly').style.maxHeight = '50px'
+            eleShowMore.innerHTML = 'Xem thêm'
+            eleShowMore.classList.replace('less-state', 'more-state')
+        }
+    }
+
+    // xem thêm -> ẩn đi -> bên chapter
+    function showMoreChapter() {
+        var eleShowMore = document.querySelector('.show-more-chapter')
+        var statusShowMore = eleShowMore.classList[0]
+        console.log(statusShowMore)
+        if (statusShowMore == 'more-state')
+        {
+            document.querySelector('.comic-detail-chapter-list').style.maxHeight = 'none'
+            eleShowMore.innerHTML = 'Ẩn đi'
+            eleShowMore.classList.replace('more-state', 'less-state')
+        }else {
+            document.querySelector('.comic-detail-chapter-list').style.maxHeight = '500px'
             eleShowMore.innerHTML = 'Xem thêm'
             eleShowMore.classList.replace('less-state', 'more-state')
         }

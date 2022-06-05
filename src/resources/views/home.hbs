@@ -10,14 +10,14 @@
                 </div>
                 <div class="swiper mySwiper">
                     <div class="swiper-wrapper">
-                        {{#each comics}}
+                        {{#each (limit comics 10)}}
                             <div class="swiper-slide">
                                 <div class="slider-comic-item">
                                     <a href="comic/{{this.slug}}">
                                         <img src="{{this.urlImage}}" alt="">
                                     </a>
                                     <a href="comic/{{this.slug}}" class="slider-comic-item-name">{{this.name}}</a>
-                                    <div class="slider-comic-item-chapter">Chapter {{this.chapters}}</div>
+                                    <div class="slider-comic-item-chapter">Chapter {{this.detailChapter.length}}</div>
                                 </div>
                             </div>
                         {{/each}}
@@ -60,12 +60,12 @@
                                         {{this.name}}
                                     </a>
                                     <a href="" class="comic-item-chapter">
-                                        Chapter {{this.chapters}}
+                                        Chapter {{this.detailChapter.length}}
                                     </a>
                                     <div class="comic-item-chapterDetail-father">
-                                        {{#each this.detailChapters}}
-                                            <a onclick="return buildUrlForDetailChaper(this, `{{this.slug}}`, `{{this.chapterNumber}}`)" href="#" class="comic-item-chapterDetail">
-                                                Chapter {{this.chapterNumber}}
+                                        {{#each this.detailChapter}}
+                                            <a onclick="return buildUrlForDetailChaper(this, `{{this.slugComic}}`, `{{this.slugChapter}}`)" href="#" class="comic-item-chapterDetail">
+                                                {{this.name}}
                                             </a>
                                         {{/each}}
                                     </div>
@@ -95,6 +95,8 @@
         item.href = `${window.location.origin}/comic/${slug}/${chapter}`
         return true
     }
+
+    
 </script>
 
 <script type="module">

@@ -1,11 +1,11 @@
 <div class="container mt-4">
     <ul class="breadcrumb">
         <li id="breadcrumb-item-home" class="breadcrumb-item">
-            <a onclick="return buildURLOrigin(this)" href="">Home</a>
+            <a href="/">Home</a>
             <div class="triangle"></div>
         </li>
         <li id="breadcrumb-item-list" class="breadcrumb-item d-none d-sm-block d-lg-block">
-            <a onclick="return buildUrlListComic(this)" href="#">Danh sách truyện</a>
+            <a href="/list-comic">Danh sách truyện</a>
             <div class="triangle"></div>
         </li>
         <li id="breadcrumb-item-genre" class="breadcrumb-item breadcrumb-item-active">
@@ -37,8 +37,15 @@
                                         {{this.name}}
                                     </a>
                                     <a href="" class="comic-item-chapter">
-                                        Chapter {{this.chapters}}
+                                        Chapter {{this.detailChapter.length}}
                                     </a>
+                                    <div class="comic-item-chapterDetail-father">
+                                        {{#each this.detailChapter}}
+                                            <a href="/comic/{{this.slugComic}}/{{this.slugChapter}}" class="comic-item-chapterDetail">
+                                                {{this.name}}
+                                            </a>
+                                        {{/each}}
+                                    </div>
                                 </div>
                             </div>
                         {{/each}}

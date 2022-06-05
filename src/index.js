@@ -14,6 +14,7 @@ db.connectDB()
 const app = express()
 
 // cấu hình sử dụng file tinh
+app.use('/secure' ,express.static(__dirname + '/public'))
 app.use('/admin/:_id', express.static(__dirname + '/public'))
 app.use('/admin', express.static(__dirname + '/public'))
 app.use('/comic/:slug/:number', express.static(__dirname + '/public'))
@@ -32,6 +33,12 @@ app.engine(
     'hbs',
     handlebars.engine({
         extname: '.hbs',
+        helpers: {
+            limit: (arr, limit) => {
+                if (!Array.isArray(arr)) { return []; }
+                return arr.slice(0, limit);
+            }
+        }
     }),
 )
 app.set('view engine', 'hbs')
