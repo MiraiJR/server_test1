@@ -113,41 +113,76 @@ class AdminController {
             .then((resultComic) => {
                 try {
                     axios.get(`https://truyentranhlh.net/truyen-tranh/${resultComic.slug}`)
-                    .then(function(response){
-                        var $ = cheerio.load(response.data)
-                        var listTitle = []
-                        var links = []
-                        var listItem = $('.list-chapters > a').each(function(i, elem) {
-                            listTitle.push($(elem).attr('title'))
-                            links.push($(elem).attr('href'))
-                        })
-                        var listChapter = []
-                        for (let i = 0; i < listTitle.length; i++) {
-                            const title = listTitle[i]
-                            const linkImage = links[i]
-                            listChapter.push({
-                                title,
-                                linkImage,
+                        .then(function(response){
+                            var $ = cheerio.load(response.data)
+                            var listTitle = []
+                            var links = []
+                            var listItem = $('.list-chapters > a').each(function(i, elem) {
+                                listTitle.push($(elem).attr('title'))
+                                links.push($(elem).attr('href'))
                             })
-                        }
-
-                        for(let i = 0; i < listChapter.length; i++) {
-                            Comic.find({slug: resultComic.slug, detailChapter: {$elemMatch: {name: listChapter[i].title}}})
-                                .then(rs => {
-                                    if(rs.length > 0)
-                                    {
-                                    }else {
-                                        var slug = getSlug(listChapter[i].title)
-                                        Comic.updateOne({_id: resultComic.id}, {$push: {detailChapter: {name: listChapter[i].title, linkImage: listChapter[i].linkImage, slugComic: resultComic.slug, slugChapter: slug}}})
-                                            .then()
-                                            .catch(next)
-                                    }
+                            var listChapter = []
+                            for (let i = 0; i < listTitle.length; i++) {
+                                const title = listTitle[i]
+                                // lấy số ra khỏi chuỗi dùng regex
+                                const numberChapter = title.match(/(\d+)/)[0]
+                                const linkImage = links[i]
+                                listChapter.push({
+                                    title,
+                                    linkImage,
+                                    numberChapter,
                                 })
-                        }
-                    })
-                    .catch(() => {
-                        return res.render('error/error')
-                    })
+                            }
+                            for(let i = 0; i < listChapter.length; i++) {
+                                // Kiểm tra nếu chapter đã tồn tại thì bỏ qua không push vào array detailChapter còn ngược lại thì push thêm dữ liệu vào
+                                Comic.find({slug: resultComic.slug, detailChapter: {$elemMatch: {name: listChapter[i].title}}})
+                                    .then(rs => {
+                                        if(rs.length > 0)
+                                        {
+                                        }else {
+                                            var slugNext
+                                            var slugPre
+                                            var slug = getSlug(listChapter[i].title)
+                                    
+                                            if(i == 0)
+                                            {
+                                                slugNext = null
+                                            }else {
+                                                slugNext = getSlug(listChapter[i - 1].title)
+                                            }
+
+                                            if(i == listChapter.length - 1)
+                                            {
+                                                slugPre = null
+                                            }else {
+                                                slugPre = getSlug(listChapter[i + 1].title)
+                                            }
+
+                                            Comic.updateOne({_id: resultComic.id}, 
+                                                {
+                                                    $push: {
+                                                        detailChapter: {
+                                                            $each: [ {
+                                                                name: listChapter[i].title, 
+                                                                linkImage: listChapter[i].linkImage, 
+                                                                slugComic: resultComic.slug, 
+                                                                slugChapter: slug, 
+                                                                numberChapter: listChapter[i].numberChapter,
+                                                                nextChapter: slugNext,
+                                                                preChapter: slugPre,
+                                                            }],
+                                                            $sort: {numberChapter: -1}
+                                                        }}})
+                                                .then( )
+                                                .catch(next)
+                                        }
+                                    })
+                            }
+                        })
+                        .catch((error) => {
+                            console.log(error)
+                            return res.render('error/error')
+                        })
                 } catch (error) {
                     console.log(error);
                     res.sendStatus(500);

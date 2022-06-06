@@ -37,6 +37,12 @@ app.engine(
             limit: (arr, limit) => {
                 if (!Array.isArray(arr)) { return []; }
                 return arr.slice(0, limit);
+            },
+            firstChapter: (array) => {
+                return array[array.length-1].slugChapter
+            }, 
+            ifEquals: (arg1, arg2, options) => {
+                return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
             }
         }
     }),

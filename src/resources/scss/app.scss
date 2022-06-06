@@ -250,10 +250,6 @@ h1{
     height: 100%;
     position: relative; 
     max-width: 200px;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 1; /* number of lines to show */
-    -webkit-box-orient: vertical;
 }
 
 .breadcrumb-item:first-child {
@@ -269,6 +265,8 @@ h1{
     }
 }
 
+
+
 .triangle {
     width: 0;
     height: 0;
@@ -283,7 +281,12 @@ h1{
 
 .breadcrumb-item > a{
     color: white;
-    margin-left: 20px;
+    margin-left: 30px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* number of lines to show */
+    -webkit-box-orient: vertical;
 }
 
 .breadcrumb-item:hover {

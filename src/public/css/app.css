@@ -212,12 +212,7 @@ h1 {
   padding-right: 30px;
   height: 100%;
   position: relative;
-  max-width: 200px;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  /* number of lines to show */
-  -webkit-box-orient: vertical; }
+  max-width: 200px; }
 
 .breadcrumb-item:first-child {
   background-color: green; }
@@ -240,7 +235,13 @@ h1 {
 
 .breadcrumb-item > a {
   color: white;
-  margin-left: 20px; }
+  margin-left: 30px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  /* number of lines to show */
+  -webkit-box-orient: vertical; }
 
 .breadcrumb-item:hover {
   background-color: #df691a; }
