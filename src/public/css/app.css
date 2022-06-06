@@ -2,9 +2,11 @@ h1 {
   color: blue; }
 
 #app {
-  background-color: aqua;
-  background-image: url("https://images.fineartamerica.com/images/artworkimages/mediumlarge/1/abstract-vector-seamless-pattern-mosaic-of-wire-hexagons-outlines-on-white-background-simple-retro-design-wallpaper-petr-polak.jpg");
+  background-image: url("https://scontent.fsgn2-4.fna.fbcdn.net/v/t39.30808-6/286575212_1516544878804097_248284459733280278_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=730e14&_nc_ohc=cobsAT31MJgAX_0NVYm&_nc_ht=scontent.fsgn2-4.fna&oh=00_AT_wnkIeZxnEXY_nV71SH9iiKKCMM79ckmvYAOVCQHW8aQ&oe=62A36276");
   background-repeat: repeat; }
+
+#header {
+  box-shadow: 0px 0px 20px 20px #000000; }
 
 .container {
   padding: 0; }
@@ -14,7 +16,20 @@ h1 {
   color: white;
   border-radius: 10px;
   margin: 50px 0;
-  padding: 0 10px; }
+  padding: 0 10px;
+  animation: borderAnimation 10s infinite; }
+
+@keyframes borderAnimation {
+  0% {
+    border: 2px solid red; }
+  25% {
+    border: 2px solid yellow; }
+  50% {
+    border: 2px solid green; }
+  75% {
+    border: 2px solid brown; }
+  100% {
+    border: 2px solid  red; } }
 
 .slider-comic-item {
   width: 200px;
@@ -84,7 +99,8 @@ h1 {
   border-radius: 10px;
   color: white;
   padding: 0 20px;
-  margin: 20px 0; }
+  margin: 20px 0;
+  animation: borderAnimation 10s infinite; }
 
 .list-comic {
   margin-top: 30px; }
@@ -182,13 +198,20 @@ h1 {
   z-index: 10; }
 
 #footer {
-  background-color: darkslategray;
+  background-color: wheat;
   padding: 30px 20px;
-  color: white; }
+  color: black;
+  box-shadow: 0px 0px 20px 10px #000000; }
 
 .footer-item {
   display: flex;
   flex-direction: column; }
+
+.footer-item > iframe {
+  animation: borderAnimation 10s infinite; }
+
+.footer-item > span {
+  text-align: center; }
 
 .footer-image {
   width: 50px;
