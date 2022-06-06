@@ -17,7 +17,7 @@
                                         <img src="{{this.urlImage}}" alt="">
                                     </a>
                                     <a href="comic/{{this.slug}}" class="slider-comic-item-name">{{this.name}}</a>
-                                    <div class="slider-comic-item-chapter">Chapter {{this.detailChapter.length}}</div>
+                                    <a href="comic/{{this.slug}}/{{this.detailChapter.0.slugChapter}}" class="slider-comic-item-chapter">{{this.detailChapter.0.name}}</a>
                                 </div>
                             </div>
                         {{/each}}
@@ -59,8 +59,8 @@
                                     <a href="comic/{{this.slug}}" class="comic-item-name">
                                         {{this.name}}
                                     </a>
-                                    <a href="" class="comic-item-chapter">
-                                        Chapter {{this.detailChapter.length}}
+                                    <a href="comic/{{this.slug}}/{{this.detailChapter.0.slugChapter}}" class="comic-item-chapter">
+                                        {{this.detailChapter.0.name}}
                                     </a>
                                     <div class="comic-item-chapterDetail-father">
                                         {{#each this.detailChapter}}

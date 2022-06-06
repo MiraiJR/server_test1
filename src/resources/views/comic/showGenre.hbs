@@ -36,8 +36,8 @@
                                     <a onclick="return buildURL(this, `{{this.slug}}`)" href="" class="comic-item-name">
                                         {{this.name}}
                                     </a>
-                                    <a href="" class="comic-item-chapter">
-                                        Chapter {{this.detailChapter.length}}
+                                    <a href="comic/{{this.slug}}/{{this.detailChapter.0.slugChapter}}" class="comic-item-chapter">
+                                        {{this.detailChapter.0.name}}
                                     </a>
                                     <div class="comic-item-chapterDetail-father">
                                         {{#each this.detailChapter}}
