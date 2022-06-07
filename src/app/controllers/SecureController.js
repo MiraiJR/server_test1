@@ -1,4 +1,5 @@
 const User = require('../models/User')
+
 const { mutipleMongooseToObject } = require('../../util/mongoose');
 
 class SecureController {
