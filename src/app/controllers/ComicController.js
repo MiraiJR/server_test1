@@ -20,23 +20,22 @@ class ComicController {
                                             dataHistory.save()
                                                 .then(() => {
                                                     History.findOne({ip: dataHistory.ip, comicHistory: {$elemMatch: {name: comic.name}}})
-                                                        .then(rs => {
-                                                            if(rs.length > 0){
-                                                                return
-                                                            }else {
+                                                        .then((rs) => {
+                                                            if(rs == null){
                                                                 History.updateOne({ip: dataHistory.ip}, {$push: {comicHistory: {name: comic.name, slug: comic.slug, urlImage: comic.urlImage}}})
-                                                                    .then()
+                                                                    .then(console.log('thanh cong'))
                                                             }
                                                         })
                                                 })
-                                        }else {
+                                        }
+                                        else {
                                             History.findOne({ip: resp.data.ipAddress, comicHistory: {$elemMatch: {name: comic.name}}})
-                                                        .then(rs => {
-                                                            if(rs == null){
-                                                                History.updateOne({ip: resp.data.ipAddress}, {$push: {comicHistory: {name: comic.name, slug: comic.slug, urlImage: comic.urlImage}}})
-                                                                    .then()
-                                                            }
-                                                        })
+                                                .then((rs) => {
+                                                    if(rs == null){
+                                                        History.updateOne({ip: resp.data.ipAddress}, {$push: {comicHistory: {name: comic.name, slug: comic.slug, urlImage: comic.urlImage}}})
+                                                            .then(console.log('thanh cong'))
+                                                    }
+                                                })
                                         }
                                     })
                                     .then(() => {
