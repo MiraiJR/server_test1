@@ -1,10 +1,34 @@
 
+@media (max-width: 475px) {
+    .navbar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .navbar-search {
+        display: flex;
+        align-items: center;
+        width: 100%;
+    }
+    #navbar-search-box {
+        max-width: none;
+        width: 100%;
+    }
+
+    #navbar-search-data {
+        left: 0;
+        right: 0;
+        width: 100%;
+    }
+}
+
 // // Tablet
 // @media (min-width: 769px) and (max-width: 1024px) {
 //     .hide-on-tablet {
 //         display: none;
 //     }
-// }   
+// }    
 
 // // medium tablet
 // @media (min-width: 601px) and (max-width: 768px) {

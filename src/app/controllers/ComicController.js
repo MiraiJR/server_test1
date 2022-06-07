@@ -8,9 +8,14 @@ class ComicController {
         Comic.findOne(req.params)
             .then((comic) => {
                 const lastChapter = comic.detailChapter.length - 1
-                res.render('comic/showComic', {
-                    comic: mongooseToObject(comic), lastChapter
-                })
+                try {
+                    res.render('comic/showComic', {
+                        comic: mongooseToObject(comic), lastChapter
+                    })
+                } catch (error) {
+                    console.log(error)
+                    return res.render('error/error')
+                }
             })
             .catch((error) => {
                 console.log(error)

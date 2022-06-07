@@ -1,0 +1,16 @@
+@media (max-width: 475px) {
+  .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: center; }
+  .navbar-search {
+    display: flex;
+    align-items: center;
+    width: 100%; }
+  #navbar-search-box {
+    max-width: none;
+    width: 100%; }
+  #navbar-search-data {
+    left: 0;
+    right: 0;
+    width: 100%; } }
