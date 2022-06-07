@@ -89,14 +89,16 @@
             <div class="history-comic">
                 <span class="history-comic-label"><i class="fa fa-history" aria-hidden="true"></i>Lịch sử đọc truyện</span>
                 <ul class="history-comic-list">
-                    {{#each listComicHistory}}
-                    <li class="row history-comic-list-item">
-                        <a class="col-xl-4" href="/comic/{{this.slug}}">
-                            <img src="{{this.urlImage}}" alt="">
-                        </a>
-                        <a href="/comic/{{this.slug}}" class="col-xl-8">{{this.name}}</a>
-                    </li>
-                    {{/each}}
+                    {{#if history}}
+                        {{#each history.comicHistory}}
+                        <li class="row history-comic-list-item">
+                            <a class="col-xl-4" href="/comic/{{this.slug}}">
+                                <img src="{{this.urlImage}}" alt="">
+                            </a>
+                            <a href="/comic/{{this.slug}}" class="col-xl-8">{{this.name}}</a>
+                        </li>
+                        {{/each}}
+                    {{/if}}
                 </ul>
             </div>
         </div>
