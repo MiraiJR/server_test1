@@ -12,10 +12,9 @@ class SiteController {
                     .then(IPclient => {
                         History.findOne({ip: IPclient.data.ipAddress})
                             .then((history) => {
-                                const listComicHistory = history.comicHistory
                                 return res.render('home', {
                                     comics: mutipleMongooseToObject(comics), 
-                                    listComicHistory: mutipleMongooseToObject(listComicHistory),
+                                    listComicHistory: mutipleMongooseToObject(history.comicHistory),
                                 })
                             })
                     })
