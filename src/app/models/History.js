@@ -2,13 +2,13 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
 
 const ComicReaded = new Schema({
-    name: {type: String, unique: true},
-    slug: {type: String, unique: true},
+    name: {type: String},
+    slug: {type: String},
     urlImage: {type: String}
 })
 
 const History = new Schema({
-    ip: {type: String, unique: true},
+    ip: {type: String},
     comicHistory: [ComicReaded]
 })
 
