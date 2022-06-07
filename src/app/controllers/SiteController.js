@@ -7,9 +7,9 @@ class SiteController {
     home(req, res, next) {
         Comic.find({})
             .then((comics) => {
-                axios.get('https://api.db-ip.com/v2/free/self')
+                axios.get('https://api.ipify.org/?format=json')
                     .then(IPclient => {
-                        History.findOne({ip: IPclient.data.ipAddress})
+                        History.findOne({ip: IPclient.data.ip})
                             .then((history) => {
                                 return res.render('home', {
                                     comics: mutipleMongooseToObject(comics), 

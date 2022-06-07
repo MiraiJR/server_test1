@@ -10,13 +10,13 @@ class ComicController {
             .then((comic) => {
                 const lastChapter = comic.detailChapter.length - 1
                 try {
-                    axios.get('https://api.db-ip.com/v2/free/self')
+                    axios.get('https://api.ipify.org/?format=json')
                             .then(resp => {
-                                History.findOne({ip: resp.data.ipAddress})
+                                History.findOne({ip: resp.data.ip})
                                     .then((ipHistory) => {
                                         if(ipHistory == null) {
                                             var dataHistory = new History
-                                            dataHistory.ip = resp.data.ipAddress
+                                            dataHistory.ip = resp.data.ip
                                             dataHistory.save()
                                                 .then(() => {
                                                     History.findOne({ip: dataHistory.ip, comicHistory: {$elemMatch: {name: comic.name}}})
@@ -29,10 +29,10 @@ class ComicController {
                                                 })
                                         }
                                         else {
-                                            History.findOne({ip: resp.data.ipAddress, comicHistory: {$elemMatch: {name: comic.name}}})
+                                            History.findOne({ip: resp.data.ip, comicHistory: {$elemMatch: {name: comic.name}}})
                                                 .then((rs) => {
                                                     if(rs == null){
-                                                        History.updateOne({ip: resp.data.ipAddress}, {$push: {comicHistory: {name: comic.name, slug: comic.slug, urlImage: comic.urlImage}}})
+                                                        History.updateOne({ip: resp.data.ip}, {$push: {comicHistory: {name: comic.name, slug: comic.slug, urlImage: comic.urlImage}}})
                                                             .then(console.log('thanh cong'))
                                                     }
                                                 })
