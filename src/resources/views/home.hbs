@@ -86,7 +86,21 @@
                 </div>
                 <iframe style="background-color: white;" src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2F1647848441994270%2Fphotos%2Fa.1648236181955496%2F3447724662006630&width=340&show_text=true&height=796&appId" width="340" height="796" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
             </div>
+            <div class="history-comic">
+                <span class="history-comic-label"><i class="fa fa-history" aria-hidden="true"></i>Lịch sử đọc truyện</span>
+                <ul class="history-comic-list">
+                    {{#each listComicHistory}}
+                    <li class="row history-comic-list-item">
+                        <a class="col-xl-4" href="/comic/{{this.slug}}">
+                            <img src="{{this.urlImage}}" alt="">
+                        </a>
+                        <a href="/comic/{{this.slug}}" class="col-xl-8">{{this.name}}</a>
+                    </li>
+                    {{/each}}
+                </ul>
+            </div>
         </div>
+        
     </div>
 </div>
 

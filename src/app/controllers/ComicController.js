@@ -1,4 +1,5 @@
 const Comic = require('../models/Comic')
+const History = require('../models/History')
 const { mongooseToObject, mutipleMongooseToObject } = require('../../util/mongoose');
 const axios = require('axios')
 const cheerio = require('cheerio')
@@ -9,9 +10,41 @@ class ComicController {
             .then((comic) => {
                 const lastChapter = comic.detailChapter.length - 1
                 try {
-                    res.render('comic/showComic', {
-                        comic: mongooseToObject(comic), lastChapter
-                    })
+                    axios.get('https://api.db-ip.com/v2/free/self')
+                            .then(resp => {
+                                History.findOne({ip: resp.data.ipAddress})
+                                    .then((ipHistory) => {
+                                        if(ipHistory == null) {
+                                            var dataHistory = new History
+                                            dataHistory.ip = resp.data.ipAddress
+                                            dataHistory.save()
+                                                .then(() => {
+                                                    History.findOne({ip: dataHistory.ip, comicHistory: {$elemMatch: {name: comic.name}}})
+                                                        .then(rs => {
+                                                            if(rs.length > 0){
+                                                                return
+                                                            }else {
+                                                                History.updateOne({ip: dataHistory.ip}, {$push: {comicHistory: {name: comic.name, slug: comic.slug, urlImage: comic.urlImage}}})
+                                                                    .then()
+                                                            }
+                                                        })
+                                                })
+                                        }else {
+                                            History.findOne({ip: resp.data.ipAddress, comicHistory: {$elemMatch: {name: comic.name}}})
+                                                        .then(rs => {
+                                                            if(rs == null){
+                                                                History.updateOne({ip: resp.data.ipAddress}, {$push: {comicHistory: {name: comic.name, slug: comic.slug, urlImage: comic.urlImage}}})
+                                                                    .then()
+                                                            }
+                                                        })
+                                        }
+                                    })
+                                    .then(() => {
+                                        return res.render('comic/showComic', {
+                                            comic: mongooseToObject(comic), lastChapter
+                                        })
+                                    })
+                            })
                 } catch (error) {
                     console.log(error)
                     return res.render('error/error')
