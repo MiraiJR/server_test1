@@ -2,7 +2,6 @@ const Comic = require('../models/Comic')
 const History = require('../models/History')
 const { mutipleMongooseToObject } = require('../../util/mongoose');
 const axios = require('axios')
-const cheerio = require('cheerio')
 
 class SiteController {
     home(req, res, next) {
@@ -10,13 +9,14 @@ class SiteController {
             .then((comics) => {
                 axios.get('https://api.db-ip.com/v2/free/self')
                     .then(IPclient => {
-                        History.findOne({ip: IPclient.data.ipAddress})
-                            .then((history) => {
-                                return res.render('home', {
-                                    comics: mutipleMongooseToObject(comics), 
-                                    listComicHistory: mutipleMongooseToObject(history.comicHistory),
-                                })
-                            })
+                        return res.json(IPclient.data)
+                        // History.findOne({ip: IPclient.data.ipAddress})
+                        //     .then((history) => {
+                        //         return res.render('home', {
+                        //             comics: mutipleMongooseToObject(comics), 
+                        //             listComicHistory: mutipleMongooseToObject(history.comicHistory),
+                        //         })
+                        //     })
                     })
             })
             .catch(() => {
