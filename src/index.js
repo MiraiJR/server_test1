@@ -7,6 +7,8 @@ const handlebars = require('express-handlebars')
 const path = require('path')
 const db = require('./config/db')
 const route = require('./routes')
+const cookieParser = require('cookie-parser')
+const cookieSession = require('cookie-session')
 
 // kết nối database
 db.connectDB()
@@ -23,11 +25,17 @@ app.use('/comic/:slug', express.static(__dirname + '/public'))
 app.use('/comic', express.static(__dirname + '/public'))
 app.use('/genre', express.static(__dirname + '/public'))
 app.use(express.static(path.join(__dirname, 'public'))) 
+app.use(cookieSession({
+    name: 'session',
+    keys: ['key1', 'key2'],
+    maxAge: 60000000000,
+  }))
 
 //middleware
 app.use(express.urlencoded())
 app.use(express.json())
 app.use(methodOverride('_method'))
+app.use(cookieParser())
 
 // template engine cho website
 app.engine(

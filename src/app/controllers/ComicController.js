@@ -6,44 +6,28 @@ const cheerio = require('cheerio')
 
 class ComicController {
     showComic(req, res, next) {
+        if(!req.session.comic) {
+            req.session.comic = []
+            req.session.comic.push(req.params.slug)
+        }else {
+            if(!req.session.comic.includes(req.params.slug))
+            {
+                req.session.comic.push(req.params.slug)
+            }
+        }
+        console.log(req.session.comic)
+        // Comic.find({slug: {$in: req.session.comic}})
+        //     .then((result) => {
+        //         return res.json(result)
+        //     })
+
         Comic.findOne(req.params)
             .then((comic) => {
                 const lastChapter = comic.detailChapter.length - 1
                 try {
-                    axios.get('https://api.ipify.org/?format=json')
-                            .then(resp => {
-                                History.findOne({ip: resp.data.ip})
-                                    .then((ipHistory) => {
-                                        if(ipHistory == null) {
-                                            var dataHistory = new History
-                                            dataHistory.ip = resp.data.ip
-                                            dataHistory.save()
-                                                .then(() => {
-                                                    History.findOne({ip: dataHistory.ip, comicHistory: {$elemMatch: {name: comic.name}}})
-                                                        .then((rs) => {
-                                                            if(rs == null){
-                                                                History.updateOne({ip: dataHistory.ip}, {$push: {comicHistory: {name: comic.name, slug: comic.slug, urlImage: comic.urlImage}}})
-                                                                    .then(console.log('thanh cong'))
-                                                            }
-                                                        })
-                                                })
-                                        }
-                                        else {
-                                            History.findOne({ip: resp.data.ip, comicHistory: {$elemMatch: {name: comic.name}}})
-                                                .then((rs) => {
-                                                    if(rs == null){
-                                                        History.updateOne({ip: resp.data.ip}, {$push: {comicHistory: {name: comic.name, slug: comic.slug, urlImage: comic.urlImage}}})
-                                                            .then(console.log('thanh cong'))
-                                                    }
-                                                })
-                                        }
-                                    })
-                                    .then(() => {
-                                        return res.render('comic/showComic', {
-                                            comic: mongooseToObject(comic), lastChapter
-                                        })
-                                    })
-                            })
+                    return res.render('comic/showComic', {
+                        comic: mongooseToObject(comic), lastChapter
+                    })
                 } catch (error) {
                     console.log(error)
                     return res.render('error/error')

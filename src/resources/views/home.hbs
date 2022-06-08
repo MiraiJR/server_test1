@@ -122,7 +122,7 @@
                 <span class="history-comic-label"><i class="fa fa-history" aria-hidden="true"></i>Lịch sử đọc truyện</span>
                 <ul class="history-comic-list">
                     {{#if history}}
-                        {{#each (limit (reverseArray history.comicHistory) 5)}}
+                        {{#each (limit history 5)}}
                         <li class="row history-comic-list-item">
                             <a class="col-4 col-lg-4 col-xl-4" href="/comic/{{this.slug}}">
                                 <img src="{{this.urlImage}}" alt="">

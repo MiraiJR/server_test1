@@ -7,18 +7,26 @@ class SiteController {
     home(req, res, next) {
         Comic.find({})
             .then((comics) => {
-                axios.get('https://api.ipify.org/?format=json')
-                    .then(IPclient => {
-                        History.findOne({ip: IPclient.data.ip})
-                            .then((history) => {
-                                return res.render('home', {
-                                    comics: mutipleMongooseToObject(comics), 
-                                    history: mongooseToObject(history),
-                                })
-                            })
+                Comic.find({slug: {$in: req.session.comic}})
+                    .then((history) => {
+                        return res.render('home', {
+                            comics: mutipleMongooseToObject(comics), 
+                            history: mutipleMongooseToObject(history),
+                        })
                     })
+                // axios.get('https://api.ipify.org/?format=json')
+                //     .then(IPclient => {
+                //         History.findOne({ip: IPclient.data.ip})
+                //             .then((history) => {
+                //                 return res.render('home', {
+                //                     comics: mutipleMongooseToObject(comics), 
+                //                     history: mongooseToObject(history),
+                //                 })
+                //             })
+                //     })
             })
-            .catch(() => {
+            .catch((error) => {
+                console.log(error)
                 res.render('error/error')
             })
     }
