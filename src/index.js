@@ -43,7 +43,30 @@ app.engine(
                 return array[array.length-1].slugChapter
             }, 
             ifEquals: (arg1, arg2, options) => {
-                return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
+                return (arg1 == arg2) ? options.fn(this) : options.inverse(this)
+            },
+            compareInt: (array, number) => {
+                return (array.length > number) ? true : false
+            },
+            returnArrayFromIndexXtoY: (array, indexX, indexY) => {
+                return array.slice(indexX, indexY)
+            },
+            listNumerForPagination: (lengthList) => {
+                let maxNumber
+                if(lengthList % 16 == 0) {
+                    maxNumber = lengthList/16
+                }else {
+                    maxNumber = lengthList/16 + 1
+                }
+                const result = []
+                for(let i = 1; i <= maxNumber; i++)
+                {
+                    result.push(i)
+                }
+                return result;
+            }, 
+            reverseArray: (array) => {
+                return array.reverse()
             },
         }
     }),

@@ -309,7 +309,8 @@ h1 {
 .history-comic {
   background-color: #000000;
   border-radius: 10px;
-  animation: borderAnimation 10s infinite; }
+  animation: borderAnimation 10s infinite;
+  margin-bottom: 40px; }
 
 .history-comic-label {
   padding: 10px;
@@ -339,3 +340,30 @@ h1 {
 
 .history-comic-list-item > a:hover {
   color: #df691a; }
+
+.see-more-comic {
+  display: flex;
+  width: 100%;
+  height: 250px;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  color: black;
+  font-size: 20px;
+  font-weight: 600; }
+
+.see-more-comic:hover {
+  text-decoration: none;
+  background-color: chocolate; }
+
+.pagination-list-comic {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%; }
+
+.page-item-active > a {
+  background-color: chocolate; }
+
+.page-item-active > a:hover {
+  background-color: chocolate; }

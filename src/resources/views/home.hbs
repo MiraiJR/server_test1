@@ -50,6 +50,36 @@
                 </div>
                 <div class="list-comic">
                     <div class="row">
+                        {{#if (compareInt comics 16)}}
+                        {{#each (limit comics 15)}}
+                            <div class="col-6 col-lg-4 col-xl-3 ">
+                                <div class="comic-item">
+                                    <a href="comic/{{this.slug}}">
+                                        <img src="{{this.urlImage}}" alt="" class="comic-item-image">
+                                    </a>
+                                    <a href="comic/{{this.slug}}" class="comic-item-name">
+                                        {{this.name}}
+                                    </a>
+                                    <a href="comic/{{this.slug}}/{{this.detailChapter.0.slugChapter}}" class="comic-item-chapter">
+                                        {{this.detailChapter.0.name}}
+                                    </a>
+                                    <div class="comic-item-chapterDetail-father">
+                                        {{#each this.detailChapter}}
+                                            <a onclick="return buildUrlForDetailChaper(this, `{{this.slugComic}}`, `{{this.slugChapter}}`)" href="#" class="comic-item-chapterDetail">
+                                                {{this.name}}
+                                            </a>
+                                        {{/each}}
+                                    </div>
+                                </div>
+                            </div>
+                        {{/each}}
+                            <div class="col-6 col-lg-4 col-xl-3 ">
+                                <a href="/list-comic" class="see-more-comic">
+                                    Xem thêm
+                                    <i class="fa fa-caret-right" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        {{else}}
                         {{#each comics}}
                             <div class="col-6 col-lg-4 col-xl-3 ">
                                 <div class="comic-item">
@@ -72,6 +102,8 @@
                                 </div>
                             </div>
                         {{/each}}
+                        {{/if}}
+                        
                     </div>
                 </div>
             </div>
@@ -90,7 +122,7 @@
                 <span class="history-comic-label"><i class="fa fa-history" aria-hidden="true"></i>Lịch sử đọc truyện</span>
                 <ul class="history-comic-list">
                     {{#if history}}
-                        {{#each history.comicHistory}}
+                        {{#each (limit (reverseArray history.comicHistory) 5)}}
                         <li class="row history-comic-list-item">
                             <a class="col-4 col-lg-4 col-xl-4" href="/comic/{{this.slug}}">
                                 <img src="{{this.urlImage}}" alt="">

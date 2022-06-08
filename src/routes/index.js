@@ -14,6 +14,9 @@ function route(app) {
     app.use('/comic', comicRouter)
     app.use('/admin', adminRouter)
     app.use('/', siteRouter)
+    app.use('*', (req, res) => {
+        return res.render('error/error')
+    })
 }
 
 module.exports = route
