@@ -30,13 +30,13 @@
                         {{#each (limit comics 16)}}
                             <div class="col-6 col-lg-4 col-xl-3 ">
                                 <div class="comic-item">
-                                    <a href="comic/{{this.slug}}">
+                                    <a href="/comic/{{this.slug}}">
                                         <img src="{{this.urlImage}}" alt="" class="comic-item-image">
                                     </a>
-                                    <a href="comic/{{this.slug}}" class="comic-item-name">
+                                    <a href="/comic/{{this.slug}}" class="comic-item-name">
                                         {{this.name}}
                                     </a>
-                                    <a href="comic/{{this.slug}}/{{this.detailChapter.0.slugChapter}}" class="comic-item-chapter">
+                                    <a href="/comic/{{this.slug}}/{{this.detailChapter.0.slugChapter}}" class="comic-item-chapter">
                                         {{this.detailChapter.0.name}}
                                     </a>
                                     <div class="comic-item-chapterDetail-father">
