@@ -1,7 +1,5 @@
 const Comic = require('../models/Comic')
-const History = require('../models/History')
-const { mongooseToObject, mutipleMongooseToObject } = require('../../util/mongoose');
-const axios = require('axios')
+const { mutipleMongooseToObject } = require('../../util/mongoose');
 
 class SiteController {
     home(req, res, next) {

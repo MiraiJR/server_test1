@@ -180,6 +180,7 @@
   overflow: scroll; }
 
 #listChapter > a {
+  display: block;
   padding: 20px 20px;
   color: black; }
 
@@ -208,3 +209,64 @@
 .history-comic-seeMore:hover {
   text-decoration: none;
   color: chocolate; }
+
+.navigation-scroll-up {
+  display: block;
+  text-align: center;
+  opacity: 0;
+  padding: 0;
+  margin: 0;
+  z-index: 100000000;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transition: 0.5s linear; }
+
+.navigation-scroll-up-item {
+  border: 1px solid white;
+  padding: 15px 0;
+  cursor: pointer; }
+
+#list-chapter-left {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  max-width: 200px;
+  height: 100vh;
+  padding: 10px 0px;
+  overflow: scroll;
+  background-color: black; }
+
+#list-chapter-left > a {
+  display: block;
+  text-align: left; }
+
+.list-chapter-left-comic {
+  border-bottom: 1px solid white;
+  padding: 10px 0; }
+
+.list-chapter-left-comic > a > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; }
+
+.list-chapter-left-comic .col-8,
+.list-chapter-left-comic .col-4 {
+  padding: 0; }
+
+.list-chapter-left-comic > a > span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  /* number of lines to show */
+  -webkit-box-orient: vertical; }
+
+.list-chapter-left-chapter {
+  padding: 10px 5px; }
+
+.list-chapter-left-chapter:hover {
+  text-decoration: none;
+  background-color: chocolate; }

@@ -1,11 +1,11 @@
 const Comic = require('../models/Comic')
-const History = require('../models/History')
 const { mongooseToObject, mutipleMongooseToObject } = require('../../util/mongoose');
 const axios = require('axios')
 const cheerio = require('cheerio')
 
 class ComicController {
     showComic(req, res, next) {
+        
         if(!req.session.comic) {
             req.session.comic = []
             req.session.comic.push(req.params.slug)
@@ -15,6 +15,7 @@ class ComicController {
                 req.session.comic.push(req.params.slug)
             }
         }
+
         console.log(req.session.comic)
 
         Comic.findOne(req.params)
@@ -66,8 +67,12 @@ class ComicController {
                         var listItem = $('.lazy').each(function(i, elem) {
                             listImageChapter.push($(elem).attr('data-src'))
                         })
-                        res.render('comic/showChapter', {
-                            chapter: mongooseToObject(chapter), listImageChapter, listChapters: mutipleMongooseToObject(listChapters), curSlugChapter
+                        return res.render('comic/showChapter', {
+                            chapter: mongooseToObject(chapter), 
+                            listImageChapter, 
+                            listChapters: mutipleMongooseToObject(listChapters), 
+                            curSlugChapter, 
+                            comic: mongooseToObject(comic)
                         })
                     })
                 } catch (error) {

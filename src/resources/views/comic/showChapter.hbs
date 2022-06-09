@@ -30,7 +30,7 @@
             <a href="/comic/{{chapter.slugComic}}/{{chapter.preChapter}}">
                 <button style="padding: 20px;"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
             </a>
-            <button onclick="showListChapter()" style="padding: 20px;"><i class="fa fa-bars" aria-hidden="true"></i></button>
+            <button onclick="showListChapter(`listChapter`)" style="padding: 20px;"><i class="fa fa-bars" aria-hidden="true"></i></button>
             <a href="/comic/{{chapter.slugComic}}/{{chapter.nextChapter}}">
                 <button style="padding: 20px;"><i class="fa fa-arrow-right" aria-hidden="true"></i></button>
             </a>
@@ -46,6 +46,36 @@
                 {{#each listImageChapter}}
                     <img src="{{this}}" alt="">
                 {{/each}}
+            </div>
+        </div>
+
+        <div class="navigation navigation-scroll-up col-12 col-lg-12 col-xl-12">
+            <div class="row">
+                <a href="/comic/{{chapter.slugComic}}/{{chapter.preChapter}}" class="col-3 navigation-scroll-up-item">
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                </a>
+                <a href="/" class="col-3 navigation-scroll-up-item">
+                    <i class="fas fa-home    "></i>
+                </a>
+                <div onclick="showListChapter(`list-chapter-left`)" class="col-3 navigation-scroll-up-item">
+                    <i class="fas fa-list    "></i>
+                </div>
+                <a href="/comic/{{chapter.slugComic}}/{{chapter.nextChapter}}" class="col-3 navigation-scroll-up-item">
+                    <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                </a>
+                <ul id="list-chapter-left">
+                    <div class="row list-chapter-left-comic">
+                        <a href="{{comic.slug}}"  class="col-4">
+                            <img src="{{comic.urlImage}}" alt="">
+                        </a>
+                        <a href="{{comic.slug}}" class="col-8">
+                            <span>{{comic.name}}</span>
+                        </a>
+                    </div>
+                    {{#each listChapters}}
+                        <a href="/comic/{{this.slugComic}}/{{this.slugChapter}}" class="list-chapter-left-chapter">{{this.name}}</a>
+                    {{/each}}
+                </ul>
             </div>
         </div>
     </div>
@@ -72,14 +102,32 @@
     }
     countViewPage()
 
+    var lastPosition = 0
+    window.addEventListener("scroll", () => {
+        var curPosition = window.pageYOffset || document.documentElement.scrollTop
+
+        if(curPosition >= lastPosition) {
+            document.querySelector('.navigation-scroll-up').style.opacity = '0'
+
+            console.log('luot xuong')
+        } else {
+            document.querySelector('.navigation-scroll-up').style.opacity = '1'
+            {{!-- document.getElementsByClassName('navigation-scroll-up').style.display = 'block' --}}
+            console.log('luot len')
+        }
+        lastPosition = curPosition <= 0 ? 0 : curPosition
+    })
+
+
     count = 0
-    function showListChapter() {
+    function showListChapter(idTag) {
         count = count + 1
         if(count % 2 == 0)
         {
-            document.getElementById('listChapter').style.display = 'none'
+            document.getElementById(`${idTag}`).style.display = 'none'
         }else {
-            document.getElementById('listChapter').style.display = 'flex'
+            document.getElementById(`${idTag}`).style.display = 'block'
         }
     }
+
 </script>
