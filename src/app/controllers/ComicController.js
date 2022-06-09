@@ -16,10 +16,6 @@ class ComicController {
             }
         }
         console.log(req.session.comic)
-        // Comic.find({slug: {$in: req.session.comic}})
-        //     .then((result) => {
-        //         return res.json(result)
-        //     })
 
         Comic.findOne(req.params)
             .then((comic) => {
@@ -40,6 +36,17 @@ class ComicController {
     }
 
     showChapter(req, res, next) {
+        if(!req.session.comic) {
+            req.session.comic = []
+            req.session.comic.push(req.params.slug)
+        }else {
+            if(!req.session.comic.includes(req.params.slug))
+            {
+                req.session.comic.push(req.params.slug)
+            }
+        }
+        console.log(req.session.comic)
+        
         Comic.findOne({slug: req.params.slug})
             .then((comic) => {
 

@@ -56,6 +56,9 @@ app.engine(
             compareInt: (array, number) => {
                 return (array.length > number) ? true : false
             },
+            compareIntEqual: (array, number) => {
+                return (array.length == number) ? true : false
+            },
             returnArrayFromIndexXtoY: (array, indexX, indexY) => {
                 return array.slice(indexX, indexY)
             },

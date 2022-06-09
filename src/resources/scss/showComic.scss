@@ -217,3 +217,24 @@
 .show-more-chapter {
     cursor: pointer;
 }
+
+.history-comic-list-item > span {
+    display: block;
+    width: 100%;
+    text-align: center;
+    color: white;
+}
+
+.history-comic-seeMore {
+    padding: 10px 0;
+    border-top: 1px solid white;
+    display: block;
+    width: 100%;
+    text-align: center;
+    color: white;
+}
+
+.history-comic-seeMore:hover {
+    text-decoration: none;
+    color: chocolate;
+}

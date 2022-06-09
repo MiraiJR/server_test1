@@ -14,16 +14,6 @@ class SiteController {
                             history: mutipleMongooseToObject(history),
                         })
                     })
-                // axios.get('https://api.ipify.org/?format=json')
-                //     .then(IPclient => {
-                //         History.findOne({ip: IPclient.data.ip})
-                //             .then((history) => {
-                //                 return res.render('home', {
-                //                     comics: mutipleMongooseToObject(comics), 
-                //                     history: mongooseToObject(history),
-                //                 })
-                //             })
-                //     })
             })
             .catch((error) => {
                 console.log(error)

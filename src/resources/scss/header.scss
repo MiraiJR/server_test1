@@ -72,3 +72,15 @@
     margin-left: 10px;
     color: black;
 }
+
+.navbar-history {
+    color: white;
+    transition: 0.3s linear;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.navbar-history:hover {
+    text-decoration: none;
+    color: black;
+}

@@ -65,7 +65,7 @@
                                     </a>
                                     <div class="comic-item-chapterDetail-father">
                                         {{#each this.detailChapter}}
-                                            <a onclick="return buildUrlForDetailChaper(this, `{{this.slugComic}}`, `{{this.slugChapter}}`)" href="#" class="comic-item-chapterDetail">
+                                            <a href="/comic/{{this.slugComic}}/{{this.slugChapter}}" class="comic-item-chapterDetail">
                                                 {{this.name}}
                                             </a>
                                         {{/each}}
@@ -94,7 +94,7 @@
                                     </a>
                                     <div class="comic-item-chapterDetail-father">
                                         {{#each this.detailChapter}}
-                                            <a onclick="return buildUrlForDetailChaper(this, `{{this.slugComic}}`, `{{this.slugChapter}}`)" href="#" class="comic-item-chapterDetail">
+                                            <a href="/comic/{{this.slugComic}}/{{this.slugChapter}}" class="comic-item-chapterDetail">
                                                 {{this.name}}
                                             </a>
                                         {{/each}}
@@ -120,32 +120,28 @@
             </div>
             <div class="history-comic">
                 <span class="history-comic-label"><i class="fa fa-history" aria-hidden="true"></i>Lịch sử đọc truyện</span>
+                {{#if history}}
                 <ul class="history-comic-list">
-                    {{#if history}}
-                        {{#each (limit history 5)}}
-                        <li class="row history-comic-list-item">
-                            <a class="col-4 col-lg-4 col-xl-4" href="/comic/{{this.slug}}">
-                                <img src="{{this.urlImage}}" alt="">
-                            </a>
-                            <a href="/comic/{{this.slug}}" class="col-8 col-lg-8 col-xl-8">{{this.name}}</a>
-                        </li>
-                        {{/each}}
-                    {{/if}}
+                    {{#each (limit history 5)}}
+                    <li class="row history-comic-list-item">
+                        <a class="col-4 col-lg-4 col-xl-4" href="/comic/{{this.slug}}">
+                            <img src="{{this.urlImage}}" alt="">
+                        </a>
+                        <a href="/comic/{{this.slug}}" class="col-8 col-lg-8 col-xl-8">{{this.name}}</a>
+                    </li>
+                    {{/each}}
                 </ul>
+                <a class="history-comic-seeMore" href="/history">Xem tất cả</a>
+                {{else}}
+                <li class="row history-comic-list-item">
+                    <span>Không có lịch sử</span>
+                </li>
+                {{/if}}
             </div>
         </div>
         
     </div>
 </div>
-
-<script>
-    function buildUrlForDetailChaper(item, slug, chapter) {
-        item.href = `${window.location.origin}/comic/${slug}/${chapter}`
-        return true
-    }
-
-    
-</script>
 
 <script type="module">
     import Swiper from 'https://unpkg.com/swiper@8/swiper-bundle.esm.browser.min.js'

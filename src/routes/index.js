@@ -5,8 +5,10 @@ const genreRouter = require('./genre')
 const listComicRouter = require('./listComic')
 // const secureRouter = require('./secure')
 const searchRouter = require('./search')
+const historyRouter = require('./history')
 
 function route(app) {
+    app.use('/history', historyRouter)
     app.use('/getComic', searchRouter)
     // app.use('/secure', secureRouter)
     app.use('/list-comic', listComicRouter)

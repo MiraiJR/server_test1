@@ -1,0 +1,54 @@
+<div id="history-page">
+    <div class="container history-list">
+        <div class="history-list-label">
+            <i class="fa fa-history" aria-hidden="true"></i>
+            Lịch sử đọc truyện
+        </div>
+        <div class="row history-list-comic">
+            {{#if (compareIntEqual history 0)}}
+            <div class="col-12 col-lg-12 col-xl-12 ">
+                <span>Bạn chưa có lịch sử đọc truyện! Hãy tiến hành đọc truyện đi nào :v</span>
+            </div>
+            {{else}}
+            {{#each history}}
+            <div id="{{this.slug}}" class="col-6 col-lg-2 col-xl-2 ">
+                <div class="comic-item">
+                    <a href="comic/{{this.slug}}">
+                        <img src="{{this.urlImage}}" alt="" class="comic-item-image">
+                    </a>
+                    <a href="comic/{{this.slug}}" class="comic-item-name">
+                        {{this.name}}
+                    </a>
+                    <button onclick="deleteComicInList(`{{this.slug}}`)" class="btn btn-danger btn-danger-modified">Xóa</button>
+                </div>
+            </div>
+            {{/each}}
+            {{/if}}
+        </div>
+    </div>
+</div>
+
+<script>
+    async function deleteComicInList(slugComic) {
+        const eleNeedRemove = document.getElementById(`${slugComic}`)
+        eleNeedRemove.remove()
+        await fetch('/getComic/history', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+        .then(res => res.json()).then(async (data) =>{
+            data = data.filter(item => item != slugComic)
+            await fetch('/getComic/updateHistory', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+        })
+        
+    }
+    
+</script>

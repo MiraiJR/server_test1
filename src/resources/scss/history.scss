@@ -1,0 +1,48 @@
+#history-page {
+    min-height: calc(100vh - 300px);
+}
+
+.history-list {
+    background-color: black;
+    margin: 40px 0;
+    border-radius: 10px;
+    animation: borderAnimation 10s infinite;
+
+}
+
+.btn-danger-modified {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 5px;
+}
+
+.history-list-label {
+    color: white;
+    border-bottom: 1px solid white;
+    padding: 15px;
+}
+
+.history-list-label > i {
+    margin-right: 10px;
+}
+
+.history-list-comic {
+    margin: 15px 15px;
+}
+
+.history-list-comic span {
+    display: block;
+    width: 100%;
+    color: white;
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+@keyframes borderAnimation {
+    0% {border: 2px solid red;}
+    25%{border: 2px solid yellow;}
+    50%{border: 2px solid green;}
+    75%{border: 2px solid brown;}
+    100% {border: 2px solid  red;}
+  }
