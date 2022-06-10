@@ -143,17 +143,6 @@
   transition: background-color 0.5s linear;
   color: black; }
 
-.navigation {
-  display: flex;
-  justify-content: space-between;
-  background-color: black;
-  padding: 5px;
-  color: white;
-  margin: 30px 0; }
-
-.navigation > i {
-  font-size: 30px; }
-
 #chapter-comic-image {
   text-align: center;
   background-color: #000000;
@@ -210,18 +199,35 @@
   text-decoration: none;
   color: chocolate; }
 
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  background-color: black;
+  padding: 5px;
+  color: white;
+  margin: 30px 0; }
+
+.navigation > i {
+  font-size: 30px; }
+
 .navigation-scroll-up {
-  display: block;
+  display: none;
   text-align: center;
-  opacity: 0;
   padding: 0;
   margin: 0;
   z-index: 100;
   position: fixed;
   bottom: 0;
   left: 0;
-  right: 0;
-  transition: 0.5s linear; }
+  right: 0; }
+
+@keyframes apearFromBotton {
+  0% {
+    bottom: -10%; }
+  50% {
+    bottom: -5%; }
+  100% {
+    bottom: 0; } }
 
 .navigation-scroll-up-modified {
   display: block;
@@ -249,7 +255,16 @@
   height: 100vh;
   padding: 10px 0px;
   overflow: scroll;
-  background-color: black; }
+  background-color: black;
+  animation: appearFromLeft 0.5s linear; }
+
+@keyframes appearFromLeft {
+  0% {
+    left: -20%; }
+  50% {
+    left: -10%; }
+  100% {
+    left: 0; } }
 
 #list-chapter-left > a {
   display: block;

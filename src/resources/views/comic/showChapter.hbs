@@ -132,9 +132,10 @@
         var curPosition = window.pageYOffset || document.documentElement.scrollTop
 
         if(curPosition >= lastPosition || curPosition < 200) {
-            document.querySelector('.navigation-scroll-up').style.opacity = '0'
+            document.querySelector('.navigation-scroll-up').style.display = 'none'
         } else {
-            document.querySelector('.navigation-scroll-up').style.opacity = '1'
+            document.querySelector('.navigation-scroll-up').style.animation = 'apearFromBotton 0.5s linear'
+            document.querySelector('.navigation-scroll-up').style.display = 'block'
         }
         lastPosition = curPosition <= 0 ? 0 : curPosition
     })
