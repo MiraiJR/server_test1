@@ -246,12 +246,19 @@
     opacity: 0;
     padding: 0;
     margin: 0;
-    z-index: 100000000;
+    z-index: 100;
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
     transition:  0.5s linear;
+}
+
+.navigation-scroll-up-modified {
+    display: block;
+    text-align: center;
+    background-color: black;
+    margin: 20px 0;
 }
 
 .navigation-scroll-up-item {
@@ -260,8 +267,16 @@
     cursor: pointer;
 }
 
+.navigation-scroll-up-item > i {
+    color: white;
+}
+
+.navigation-scroll-up-item:hover {
+    background-color: chocolate;
+}
+
 #list-chapter-left {
-    display: none;
+    display: block;
     position: fixed;
     top: 0;
     left: 0;
@@ -303,9 +318,27 @@
 
 .list-chapter-left-chapter {
     padding: 10px 5px;
+    color: white;
 }
 
 .list-chapter-left-chapter:hover {
     text-decoration: none;
     background-color: chocolate;
+    color: red;
+}
+
+.chapter-active {
+    background-color: chocolate;
+}
+
+#list-chapter-left-layer {
+    display: none;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    height: 100vh;
+    z-index: 1000;
+    background-color: rgba($color: #000000, $alpha: 0.6);
 }
