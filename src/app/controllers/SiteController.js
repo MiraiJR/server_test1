@@ -3,9 +3,17 @@ const { mutipleMongooseToObject } = require('../../util/mongoose');
 
 class SiteController {
     home(req, res, next) {
+        var arrayComic = []
+
+        if(req.session.comic) {
+            req.session.comic.forEach(element => {
+                arrayComic.push(element.comic)
+            });
+        }
+
         Comic.find({})
             .then((comics) => {
-                Comic.find({slug: {$in: req.session.comic}})
+                Comic.find({slug: {$in: arrayComic}})
                     .then((history) => {
                         return res.render('home', {
                             comics: mutipleMongooseToObject(comics), 

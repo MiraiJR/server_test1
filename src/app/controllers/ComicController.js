@@ -5,14 +5,21 @@ const cheerio = require('cheerio')
 
 class ComicController {
     showComic(req, res, next) {
-        
         if(!req.session.comic) {
             req.session.comic = []
-            req.session.comic.push(req.params.slug)
+            var arrayComic = []
+            var comicAndChapterReaded = {}
+
+            comicAndChapterReaded.comic = req.params.slug
+            comicAndChapterReaded.curChapterReading = null
+            req.session.comic.push(comicAndChapterReaded)
         }else {
-            if(!req.session.comic.includes(req.params.slug))
+            if(req.session.comic.filter(item => item.comic == req.params.slug).length == 0)
             {
-                req.session.comic.push(req.params.slug)
+                var comicAndChapterReaded = {}
+                comicAndChapterReaded.comic = req.params.slug
+                comicAndChapterReaded.curChapterReading = null
+                req.session.comic.push(comicAndChapterReaded)
             }
         }
 
@@ -21,9 +28,16 @@ class ComicController {
         Comic.findOne(req.params)
             .then((comic) => {
                 const lastChapter = comic.detailChapter.length - 1
+
+                const continueReading = req.session.comic.find(element => element.comic == req.params.slug).curChapterReading
+
+                console.log(continueReading)
+
                 try {
                     return res.render('comic/showComic', {
-                        comic: mongooseToObject(comic), lastChapter
+                        comic: mongooseToObject(comic), 
+                        lastChapter, 
+                        continueReading,
                     })
                 } catch (error) {
                     console.log(error)
@@ -39,13 +53,28 @@ class ComicController {
     showChapter(req, res, next) {
         if(!req.session.comic) {
             req.session.comic = []
-            req.session.comic.push(req.params.slug)
+            var arrayComic = []
+            var comicAndChapterReaded = {}
+
+            comicAndChapterReaded.comic = req.params.slug
+            comicAndChapterReaded.curChapterReading = req.params.slugChapter
+            req.session.comic.push(comicAndChapterReaded)
         }else {
-            if(!req.session.comic.includes(req.params.slug))
+            if(req.session.comic.filter(item => item.comic == req.params.slug).length == 0)
             {
-                req.session.comic.push(req.params.slug)
+                var comicAndChapterReaded = {}
+                comicAndChapterReaded.comic = req.params.slug
+                comicAndChapterReaded.curChapterReading = req.params.slugChapter
+                req.session.comic.push(comicAndChapterReaded)
+            }else {
+                req.session.comic.forEach((item) => {
+                    if(item.comic == req.params.slug) {
+                        item.curChapterReading = req.params.slugChapter
+                    }
+                })
             }
         }
+
         console.log(req.session.comic)
         
         Comic.findOne({slug: req.params.slug})

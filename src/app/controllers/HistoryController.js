@@ -3,7 +3,15 @@ const { mongooseToObject, mutipleMongooseToObject } = require('../../util/mongoo
 
 class HistoryController {
     history(req, res, next) {
-        Comic.find({slug: {$in: req.session.comic}})
+        var arrayComic = []
+
+        if(req.session.comic) {
+            req.session.comic.forEach(element => {
+                arrayComic.push(element.comic)
+            });
+        }
+
+        Comic.find({slug: {$in: arrayComic}})
             .then((history) => {
                 return res.render('history/history', {
                     history: mutipleMongooseToObject(history),

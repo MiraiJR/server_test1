@@ -53,6 +53,9 @@
                         <div class="comic-detail-chapter-label">
                             Danh sách chương ({{comic.detailChapter.length}})
                         </div>
+                        {{#if continueReading}}
+                        <a href="/comic/{{comic.slug}}/{{continueReading}}" class="btn btn-modified">Đọc tiếp</a>
+                        {{/if}}
                         <ul class="comic-detail-chapter-list">
                         {{#each comic.detailChapter}}
                             <a href="/comic/{{this.slugComic}}/{{this.slugChapter}}" class="comic-detail-chapter-item">

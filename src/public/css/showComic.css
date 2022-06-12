@@ -124,7 +124,7 @@
   font-weight: 600; }
 
 .comic-detail-chapter-list {
-  margin-top: 30px;
+  margin-top: 5px;
   display: flex;
   flex-direction: column;
   flex: 1;
