@@ -1,0 +1,73 @@
+{{#if message}}
+    <div class="alert alert-danger" role="alert">
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+    <span class="sr-only">Error:</span>
+    {{message}}
+    </div>
+{{/if}}
+
+<h1 style="width: 100%; text-align: center; " class="post-comic-label">
+    Tạo truyện
+</h1>
+<form method="POST" action="/admin/create">
+    <div class="row mt-4">
+        <div class="col-2 edit-comic-property">
+            <label for="name">Tên truyện</label>
+        </div>
+        <div class="col-10 edit-comic-input">
+            <input type="text" class="form-control" id="name" name="name">
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-2 edit-comic-property">
+            <label for="urlImage">Link ảnh mô tả</label>
+        </div>
+        <div class="col-10 edit-comic-input">
+            <input type="text" class="form-control" id="urlImage" name="urlImage">
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-2 edit-comic-property">
+            <label for="author">Tác giả</label>
+        </div>
+        <div class="col-10 edit-comic-input">
+            <input type="text" class="form-control" id="author" name="author">
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-2 edit-comic-property">
+            <label for="country">Quốc gia</label>
+        </div>
+        <div class="col-10 edit-comic-input">
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="country" id="inlineRadio1" value="manga">
+                <label class="form-check-label" for="inlineRadio1">Nhật Bản</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="country" id="inlineRadio2" value="manhua">
+                <label class="form-check-label" for="inlineRadio2">Trung Quốc</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="country" id="inlineRadio3" value="manhwa">
+                <label class="form-check-label" for="inlineRadio3">Hàn Quốc</label>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-2 edit-comic-property">
+            <label for="content">Nội dung</label>
+        </div>
+        <div class="col-10 edit-comic-input">
+            <textarea type="text" class="form-control" id="content" name="content"></textarea>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary mt-4" id="create-comic" onclick="checkEmptyValue()" style="width: 100%;">Tạo</button>
+</form>
+
+<script>
+    function checkEmptyValue() {
+        if(document.getElementById('name').value == "") {
+            alert("Empty value! Please fill in all")
+        }
+    }
+</script>

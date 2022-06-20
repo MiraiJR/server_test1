@@ -19,6 +19,16 @@ class SiteController {
         console.log(req.session.comic)
         return res.json(req.session.comic)
     }
+
+    updateDBComic(req, res, next) {
+        Comic.deleteOne({_id: req.body.idComic})
+            .then(() => res.redirect('back'))
+            .catch(() => {
+                return res.render('error/error')
+            })
+        return res.json()
+    }
+    
 }
 
 module.exports = new SiteController()

@@ -5,12 +5,12 @@
             Lịch sử đọc truyện
         </div>
         <div class="row history-list-comic">
-            {{#if (compareIntEqual history 0)}}
+            {{#if (compareIntEqual historyComic 0)}}
             <div class="col-12 col-lg-12 col-xl-12 ">
                 <span>Bạn chưa có lịch sử đọc truyện! Hãy tiến hành đọc truyện đi nào :v</span>
             </div>
             {{else}}
-            {{#each history}}
+            {{#each historyComic}}
             <div id="{{this.slug}}" class="col-6 col-lg-2 col-xl-2 ">
                 <div class="comic-item">
                     <a href="comic/{{this.slug}}">
@@ -39,7 +39,9 @@
             },
         })
         .then(res => res.json()).then(async (data) =>{
-            data = data.filter(item => item != slugComic)
+            data = data.filter(item => item.comic != slugComic)
+            console.log(data.length)
+
             await fetch('/getComic/updateHistory', {
                 method: 'POST',
                 headers: {
@@ -47,6 +49,9 @@
                 },
                 body: JSON.stringify(data)
             })
+            if(data.length == 0) {
+                location.reload()
+            }
         })
         
     }

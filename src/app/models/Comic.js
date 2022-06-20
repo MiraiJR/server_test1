@@ -24,6 +24,8 @@ const Comic = new Schema({
     content: {type: String},
     country: {type: String, default: 'manga'},
     detailChapter: [chapter],
+    createAt: {type: Date, default: new Date()},
+    updateAt: {type: Date, default: new Date()},
 });
 
 module.exports = mongoose.model('Comic', Comic)

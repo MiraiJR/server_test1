@@ -11,7 +11,7 @@ class SiteController {
             });
         }
 
-        Comic.find({})
+        Comic.find({}).sort({updateAt: -1})
             .then((comics) => {
                 Comic.find({slug: {$in: arrayComic}})
                     .then((history) => {

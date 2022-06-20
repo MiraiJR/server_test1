@@ -12,9 +12,9 @@ class HistoryController {
         }
 
         Comic.find({slug: {$in: arrayComic}})
-            .then((history) => {
+            .then((historyComic) => {
                 return res.render('history/history', {
-                    history: mutipleMongooseToObject(history),
+                    historyComic: mutipleMongooseToObject(historyComic),
                 })
             })
     }

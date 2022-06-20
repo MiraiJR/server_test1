@@ -1,0 +1,98 @@
+li {
+  list-style: none; }
+
+#admin-page .col-2,
+#admin-page .col-10,
+#admin-page .col-12,
+#admin-page .row {
+  padding: 0;
+  margin: 0; }
+
+.admin-content {
+  margin: 20px; }
+
+#admin-page {
+  background-color: #f4f6f9; }
+
+.admin-navigation {
+  background-color: #343a40;
+  height: 100vh;
+  color: white; }
+
+.admin-navigation > img {
+  width: 100%;
+  padding: 10px;
+  border-bottom: 1px solid white; }
+
+.admin-setting-account {
+  padding: 0 10px;
+  color: #ccc;
+  display: flex;
+  flex-direction: column; }
+
+.admin-setting-account-label {
+  font-size: 16px;
+  font-weight: 200;
+  padding: 10px 0;
+  text-transform: uppercase; }
+
+.admin-setting-account-item {
+  padding: 8px;
+  border-radius: 10px;
+  color: #ccc; }
+
+.admin-setting-account-item:hover {
+  color: white;
+  background-color: rgba(255, 255, 255, 0.4);
+  text-decoration: none; }
+
+.admin-navbar {
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 50px;
+  align-items: center;
+  border-bottom: 0.5px solid black; }
+
+.admin-navbar-user {
+  display: flex;
+  align-items: center; }
+
+.admin-navbar-user-avatar {
+  width: 30px;
+  border-radius: 50%; }
+
+.admin-navbar-menu > i {
+  margin-right: 40px; }
+
+.library-comic {
+  max-height: 100vh;
+  overflow: hidden;
+  background-color: white;
+  border: 1px black solid; }
+
+.table {
+  margin: 0; }
+
+.btn-link {
+  color: black; }
+
+.btn-link:hover {
+  color: chocolate;
+  text-decoration: none; }
+
+.pagination-list-comic {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+
+.active-navigation {
+  background-color: #28a745;
+  color: white; }
+
+.admin-footer {
+  background-color: white;
+  padding: 20px;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black; }

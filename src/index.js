@@ -62,12 +62,12 @@ app.engine(
             returnArrayFromIndexXtoY: (array, indexX, indexY) => {
                 return array.slice(indexX, indexY)
             },
-            listNumerForPagination: (lengthList) => {
+            listNumerForPagination: (lengthList, number) => {
                 let maxNumber
-                if(lengthList % 16 == 0) {
-                    maxNumber = lengthList/16
+                if(lengthList % number == 0) {
+                    maxNumber = lengthList/number
                 }else {
-                    maxNumber = lengthList/16 + 1
+                    maxNumber = lengthList/number + 1
                 }
                 const result = []
                 for(let i = 1; i <= maxNumber; i++)
@@ -78,6 +78,9 @@ app.engine(
             }, 
             reverseArray: (array) => {
                 return array.reverse()
+            },
+            sum: (a, b) => {
+                return a + b;
             },
         }
     }),

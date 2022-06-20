@@ -1,25 +1,48 @@
-<div class="container mt-4">
-    <div class="post-comic">
-        <div class="post-comic-label">
-            Sửa truyện
+<h1 style="width: 100%; text-align: center; " class="post-comic-label">
+    Sửa truyện
+</h1>
+<form onclick="return buildUrlForFormEdit(this, `{{comic._id}}`)" method="POST" action="">
+    <div class="row mt-4">
+        <div class="col-2 edit-comic-property">
+            Tên truyện
         </div>
-        <form onclick="return buildUrlForFormEdit(this, `{{comic._id}}`)" method="POST" action="">
-            <div class="form-group">
-                <label for="name">Tên truện</label>
-                <input type="text" class="form-control" id="name" name="name" value="{{comic.name}}">
-            </div>
-            <div class="form-group">
-                <label for="chapterNumber">Chapter</label>
-                <input type="text" class="form-control" id="chapterNumber" name="detailChapters">
-            </div>
-            <div class="form-group">
-                <label for="images">Link ảnh</label>
-                <textarea type="text" class="form-control" id="images" name="detailChapters"></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary mt-4">Sửa</button>
-        </form>
+        <div class="col-10 edit-comic-input">
+            <input type="text" class="form-control" id="name" name="name" value="{{comic.name}}">
+        </div>
     </div>
-</div>
+    <div class="row mt-4">
+        <div class="col-2 edit-comic-property">
+            Tác giả
+        </div>
+        <div class="col-10 edit-comic-input">
+            <input type="text" class="form-control" id="author" name="author" value="{{comic.author}}">
+        </div>
+    </div>
+    <div class="mt-4">
+        <label style="display: block;">Quốc gia</label>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="country" id="inlineRadio1" value="manga">
+            <label class="form-check-label" for="inlineRadio1">Nhật Bản</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="country" id="inlineRadio2" value="manhua">
+            <label class="form-check-label" for="inlineRadio2">Trung Quốc</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="country" id="inlineRadio3" value="manhwa">
+            <label class="form-check-label" for="inlineRadio3">Hàn Quốc</label>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-2 edit-comic-property">
+            Nội dung
+        </div>
+        <div class="col-10 edit-comic-input">
+            <textarea type="text" class="form-control" id="content" name="content">{{comic.content}}</textarea>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary mt-4" style="width: 100%;">Sửa</button>
+</form>
 
 <script>
     function buildUrlForFormEdit(item, id) {

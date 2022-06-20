@@ -4,16 +4,34 @@ const { json } = require('express')
 const cheerio = require('cheerio')
 const axios = require('axios')
 const getSlug = require('speakingurl')  
- 
 
 class AdminController {
-    admin(req, res, next) {
+    libraryComic(req, res, next) {
         Comic.find().sort({name: 1})
-            .then(comics => res.render('admin/admin', {
-                comics: mutipleMongooseToObject(comics)
-            }))
+            .then((comics) => {
+                const lengthListComics = comics.length
+                
+                if(req.query.page == null) {
+                    return res.render('admin/admin', {
+                        comics: mutipleMongooseToObject(comics.slice(0, 9)),
+                        layout: 'adminLayout',
+                        name: 'hao',
+                        lengthListComics,
+                    })
+                }else {
+                    const curPage = req.query.page
+                    const startFrom = 9*(curPage - 1)
+                    const end = 9*(curPage)
+                    return res.render('admin/admin', {
+                        comics: mutipleMongooseToObject(comics.slice(startFrom, end)),
+                        layout: 'adminLayout',
+                        name: 'hao',
+                        lengthListComics,
+                    })
+                }
+            })
             .catch(() => {
-                return res.render('error/error')
+                res.render('error/error')
             })
     }
 
@@ -21,19 +39,98 @@ class AdminController {
         var message = ""
         if(req.body.name == "" || req.body.urlImage == "" || req.body.author == "" || req.body.content == "") {
             message = "Empty value! Please input value again!"
-            Comic.find().sort({name: 1})
-            .then(comics => res.render('admin/admin', {
-                comics: mutipleMongooseToObject(comics), message
-            }))
-            .catch(() => {
-                return res.render('error/error')
-            })
+            return res.redirect(req.get('referer'))
         }
         else {
             const comic = new Comic(req.body)
             comic.save()
-                .then(() => res.redirect('/admin'))
-                .catch(() => {
+                .then(() => {
+                    Comic.findOne({_id: comic._id})
+                        .then((resultComic) => {
+                            try {
+                                axios.get(`https://truyentranhlh.net/truyen-tranh/${resultComic.slug}`)
+                                    .then(function(response){
+                                        var $ = cheerio.load(response.data)
+                                        var listTitle = []
+                                        var links = []
+                                        var listItem = $('.list-chapters > a').each(function(i, elem) {
+                                            listTitle.push($(elem).attr('title'))
+                                            links.push($(elem).attr('href'))
+                                        })
+                                        var listChapter = []
+                                        for (let i = 0; i < listTitle.length; i++) {
+                                            const title = listTitle[i]
+                                            // lấy số ra khỏi chuỗi dùng regex
+                                            const numberChapter = Number(title.match(/(\d+\.?(\d+)?)/)[0])
+                                            const linkImage = links[i]
+                                            listChapter.push({
+                                                title,
+                                                linkImage,
+                                                numberChapter,
+                                            })
+                                        }
+                                        for(let i = 0; i < listChapter.length; i++) {
+                                            // Kiểm tra nếu chapter đã tồn tại thì bỏ qua không push vào array detailChapter còn ngược lại thì push thêm dữ liệu vào
+                                            Comic.find({slug: resultComic.slug, detailChapter: {$elemMatch: {name: listChapter[i].title}}})
+                                                .then(rs => {
+                                                    if(rs.length > 0)
+                                                    {
+                                                    }else {
+                                                        var slugNext
+                                                        var slugPre
+                                                        var slug = getSlug(listChapter[i].title)
+                                                
+                                                        if(i == 0)
+                                                        {
+                                                            slugNext = null
+                                                        }else {
+                                                            slugNext = getSlug(listChapter[i - 1].title)
+                                                        }
+
+                                                        if(i == listChapter.length - 1)
+                                                        {
+                                                            slugPre = null
+                                                        }else {
+                                                            slugPre = getSlug(listChapter[i + 1].title)
+                                                        }
+
+                                                        Comic.updateOne({_id: resultComic.id}, 
+                                                            {
+                                                                $set: {updateAt: new Date()},
+                                                                $push: {
+                                                                    detailChapter: {
+                                                                        $each: [ {
+                                                                            name: listChapter[i].title, 
+                                                                            linkImage: listChapter[i].linkImage, 
+                                                                            slugComic: resultComic.slug, 
+                                                                            slugChapter: slug, 
+                                                                            numberChapter: listChapter[i].numberChapter,
+                                                                            nextChapter: slugNext,
+                                                                            preChapter: slugPre,
+                                                                        }],
+                                                                        $sort: {numberChapter: -1}
+                                                                    }}})
+                                                            .then( )
+                                                            .catch(next)
+                                                    }
+                                                })
+                                        }
+                                    })
+                                    .catch((error) => {
+                                        console.log(error)
+                                        return res.render('error/error')
+                                    })
+                            } catch (error) {
+                                console.log(error);
+                                res.sendStatus(500);
+                                return
+                            }
+                            return res.redirect('/admin/library-comic')
+                        })
+                        .catch(next)
+                })
+                .catch((error) => {
+                    console.log(error)
                     return res.render('error/error')
                 })
         }
@@ -44,6 +141,7 @@ class AdminController {
             .then((comic) => {
                 res.render('admin/edit', {
                     comic: mongooseToObject(comic),
+                    layout: 'adminLayout',
                 })
             })
             .catch(() => {
@@ -125,7 +223,7 @@ class AdminController {
                             for (let i = 0; i < listTitle.length; i++) {
                                 const title = listTitle[i]
                                 // lấy số ra khỏi chuỗi dùng regex
-                                const numberChapter = title.match(/(\d+)/)[0]
+                                const numberChapter = Number(title.match(/(\d+\.?(\d+)?)/)[0])
                                 const linkImage = links[i]
                                 listChapter.push({
                                     title,
@@ -157,9 +255,9 @@ class AdminController {
                                             }else {
                                                 slugPre = getSlug(listChapter[i + 1].title)
                                             }
-
-                                            Comic.updateOne({_id: resultComic.id}, 
+                                            Comic.updateOne({_id: resultComic.id},
                                                 {
+                                                    $set: {updateAt: new Date()},
                                                     $push: {
                                                         detailChapter: {
                                                             $each: [ {
@@ -173,7 +271,7 @@ class AdminController {
                                                             }],
                                                             $sort: {numberChapter: -1}
                                                         }}})
-                                                .then( )
+                                                .then()
                                                 .catch(next)
                                         }
                                     })
@@ -191,6 +289,13 @@ class AdminController {
                 return res.redirect('back')
             })
             .catch(next)
+    }
+
+    createComic(req, res, next) {
+        return res.render('admin/create', {
+            layout: 'adminLayout',
+            name: 'hao',
+        })
     }
 }
 
