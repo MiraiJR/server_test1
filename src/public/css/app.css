@@ -130,14 +130,16 @@ h1 {
   color: white; }
 
 .comic-item-chapter {
-  color: white;
   width: 100%;
-  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.03), rgba(0, 0, 0, 0.7));
   padding: 10px 0;
+  font-weight: 700;
   position: absolute;
   top: 0;
   left: 0;
-  right: 0; }
+  right: 0;
+  background: linear-gradient(to right, #ff0500, #ff0056, #5d00ff, #008eff, #00e3ff, #00ff0b, #e8ff00, #ff9e00, #ff3d00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; }
 
 .container-comic-label {
   padding: 15px 0;

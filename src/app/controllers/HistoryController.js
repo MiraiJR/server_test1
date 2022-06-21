@@ -4,7 +4,6 @@ const { mongooseToObject, mutipleMongooseToObject } = require('../../util/mongoo
 class HistoryController {
     history(req, res, next) {
         var arrayComic = []
-
         if(req.session.comic) {
             req.session.comic.forEach(element => {
                 arrayComic.push(element.comic)

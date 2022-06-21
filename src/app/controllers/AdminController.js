@@ -7,7 +7,7 @@ const getSlug = require('speakingurl')
 
 class AdminController {
     libraryComic(req, res, next) {
-        Comic.find().sort({name: 1})
+        Comic.find().sort({updateAt: -1})
             .then((comics) => {
                 const lengthListComics = comics.length
                 
@@ -61,7 +61,12 @@ class AdminController {
                                         for (let i = 0; i < listTitle.length; i++) {
                                             const title = listTitle[i]
                                             // lấy số ra khỏi chuỗi dùng regex
-                                            const numberChapter = Number(title.match(/(\d+\.?(\d+)?)/)[0])
+                                            if(!title.match(/(\d+\.?(\d+)?)/)) {
+                                                continue
+                                            } else {
+                                                var numberChapter = Number(title.match(/(\d+\.?(\d+)?)/)[0])
+                                            }
+
                                             const linkImage = links[i]
                                             listChapter.push({
                                                 title,
@@ -223,7 +228,11 @@ class AdminController {
                             for (let i = 0; i < listTitle.length; i++) {
                                 const title = listTitle[i]
                                 // lấy số ra khỏi chuỗi dùng regex
-                                const numberChapter = Number(title.match(/(\d+\.?(\d+)?)/)[0])
+                                if(!title.match(/(\d+\.?(\d+)?)/)) {
+                                    continue
+                                } else {
+                                    var numberChapter = Number(title.match(/(\d+\.?(\d+)?)/)[0])
+                                }
                                 const linkImage = links[i]
                                 listChapter.push({
                                     title,

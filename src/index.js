@@ -82,7 +82,15 @@ app.engine(
             sum: (a, b) => {
                 return a + b;
             },
-        }
+            compareDate: (date1) => {
+                const date2 = new Date()
+                if(date2.getTime() - date1.getTime() > 86400000) {
+                    return false
+                }else {
+                    return true
+                }
+            },
+        } 
     }),
 )
 app.set('view engine', 'hbs')
