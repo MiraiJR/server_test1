@@ -1,15 +1,13 @@
 {{#if message}}
-    <div class="alert alert-danger" role="alert">
-    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-    <span class="sr-only">Error:</span>
-    {{message}}
+    <div class="alert alert-danger">
+        <strong>Error!</strong> {{message}}
     </div>
 {{/if}}
 
 <h1 style="width: 100%; text-align: center; " class="post-comic-label">
     Tạo truyện
 </h1>
-<form method="POST" action="/admin/create">
+<form method="POST">
     <div class="row mt-4">
         <div class="col-2 edit-comic-property">
             <label for="name">Tên truyện</label>
@@ -65,9 +63,9 @@
 </form>
 
 <script>
-    function checkEmptyValue() {
+    {{!-- function checkEmptyValue() {
         if(document.getElementById('name').value == "") {
             alert("Empty value! Please fill in all")
         }
-    }
+    } --}}
 </script>

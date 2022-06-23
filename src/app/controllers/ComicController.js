@@ -1,4 +1,5 @@
 const Comic = require('../models/Comic')
+const User = require('../models/User')
 const { mongooseToObject, mutipleMongooseToObject } = require('../../util/mongoose');
 const axios = require('axios')
 const cheerio = require('cheerio')
@@ -23,8 +24,6 @@ class ComicController {
             }
         }
 
-        console.log(req.session.comic)
-
         Comic.findOne(req.params)
             .then((comic) => {
                 const lastChapter = comic.detailChapter.length - 1
@@ -34,11 +33,23 @@ class ComicController {
                 console.log(continueReading)
 
                 try {
-                    return res.render('comic/showComic', {
-                        comic: mongooseToObject(comic), 
-                        lastChapter, 
-                        continueReading,
-                    })
+                    if(req.session.userId == null) {
+                        return res.render('comic/showComic', {
+                            comic: mongooseToObject(comic), 
+                            lastChapter, 
+                            continueReading,
+                        })
+                    }else {
+                        User.findOne({_id: req.session.userId})
+                            .then((user) => {
+                                return res.render('comic/showComic', {
+                                    comic: mongooseToObject(comic), 
+                                    lastChapter, 
+                                    continueReading,
+                                    user: mongooseToObject(user),
+                                })
+                            })
+                    }
                 } catch (error) {
                     console.log(error)
                     return res.render('error/error')
@@ -75,8 +86,6 @@ class ComicController {
             }
         }
 
-        console.log(req.session.comic)
-        
         Comic.findOne({slug: req.params.slug})
             .then((comic) => {
 
@@ -96,13 +105,27 @@ class ComicController {
                         var listItem = $('.lazy').each(function(i, elem) {
                             listImageChapter.push($(elem).attr('data-src'))
                         })
-                        return res.render('comic/showChapter', {
-                            chapter: mongooseToObject(chapter), 
-                            listImageChapter, 
-                            listChapters: mutipleMongooseToObject(listChapters), 
-                            curSlugChapter, 
-                            comic: mongooseToObject(comic)
-                        })
+                        if(req.session.userId == null) {
+                            return res.render('comic/showChapter', {
+                                chapter: mongooseToObject(chapter), 
+                                listImageChapter, 
+                                listChapters: mutipleMongooseToObject(listChapters), 
+                                curSlugChapter, 
+                                comic: mongooseToObject(comic)
+                            })
+                        } else {
+                            User.findOne({_id: req.session.userId})
+                                .then((user)=> {
+                                    return res.render('comic/showChapter', {
+                                        chapter: mongooseToObject(chapter), 
+                                        listImageChapter, 
+                                        listChapters: mutipleMongooseToObject(listChapters), 
+                                        curSlugChapter, 
+                                        comic: mongooseToObject(comic),
+                                        user: mongooseToObject(user),
+                                    })
+                                })
+                        }
                     })
                 } catch (error) {
                     console.log(error)

@@ -1,5 +1,6 @@
 const Comic = require('../models/Comic')
-const { mutipleMongooseToObject } = require('../../util/mongoose');
+const User = require('../models/User')
+const { mutipleMongooseToObject, mongooseToObject } = require('../../util/mongoose');
 
 class SiteController {
     home(req, res, next) {
@@ -10,15 +11,25 @@ class SiteController {
                 arrayComic.push(element.comic)
             });
         }
-
         Comic.find({}).sort({updateAt: -1})
             .then((comics) => {
                 Comic.find({slug: {$in: arrayComic}})
                     .then((history) => {
-                        return res.render('home', {
-                            comics: mutipleMongooseToObject(comics), 
-                            history: mutipleMongooseToObject(history),
-                        })
+                        if(req.session.userId == null) {
+                            return res.render('home', {
+                                comics: mutipleMongooseToObject(comics), 
+                                history: mutipleMongooseToObject(history),
+                            })
+                        }else {
+                            User.findOne({_id: `${req.session.userId}`})
+                                .then((user) => {
+                                    return res.render('home', {
+                                        comics: mutipleMongooseToObject(comics), 
+                                        history: mutipleMongooseToObject(history),
+                                        user: mongooseToObject(user)
+                                    })
+                                })
+                        }
                     })
             })
             .catch((error) => {

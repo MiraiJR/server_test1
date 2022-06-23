@@ -1,5 +1,6 @@
 const Comic = require('../models/Comic')
-const { mutipleMongooseToObject } = require('../../util/mongoose');
+const User = require('../models/User')
+const { mutipleMongooseToObject, mongooseToObject } = require('../../util/mongoose');
 
 class ListComicController {
     showList(req, res, next) {
@@ -7,10 +8,21 @@ class ListComicController {
             .then((comics) => {
                 const lengthListComics = comics.length
                 if(req.query.page == null) {
-                    return res.render('comic/showGenre', {
-                        lengthListComics,
-                        comics: mutipleMongooseToObject(comics.slice(0, 16))
-                    })
+                    if(req.session.userId == null) {
+                        return res.render('comic/showGenre', {
+                            lengthListComics,
+                            comics: mutipleMongooseToObject(comics.slice(0, 16))
+                        })
+                    } else {
+                        User.findOne({_id: req.session.userId})
+                            .then((user) => {
+                                return res.render('comic/showGenre', {
+                                    lengthListComics,
+                                    comics: mutipleMongooseToObject(comics.slice(0, 16)),
+                                    user: mongooseToObject(user)
+                                })
+                            })
+                    }
                 }else {
                     const curPage = req.query.page
                     const startFrom = 16*(curPage - 1)

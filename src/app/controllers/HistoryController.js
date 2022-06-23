@@ -1,4 +1,5 @@
 const Comic = require('../models/Comic')
+const User = require('../models/User')
 const { mongooseToObject, mutipleMongooseToObject } = require('../../util/mongoose')
 
 class HistoryController {
@@ -12,9 +13,13 @@ class HistoryController {
 
         Comic.find({slug: {$in: arrayComic}})
             .then((historyComic) => {
-                return res.render('history/history', {
-                    historyComic: mutipleMongooseToObject(historyComic),
-                })
+                User.findOne({_id: req.session.userId}) 
+                    .then((user) => {
+                        return res.render('history/history', {
+                            historyComic: mutipleMongooseToObject(historyComic),
+                            user: mongooseToObject(user)
+                        })
+                    })
             })
     }
 }

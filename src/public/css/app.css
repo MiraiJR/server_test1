@@ -308,6 +308,11 @@ h1 {
   margin-bottom: 20px;
   text-transform: uppercase; }
 
+.secure-link-register {
+  display: block;
+  float: right;
+  margin: 10px; }
+
 .history-comic {
   background-color: #000000;
   border-radius: 10px;

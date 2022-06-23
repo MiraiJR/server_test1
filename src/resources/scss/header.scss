@@ -84,3 +84,87 @@
     text-decoration: none;
     color: black;
 }
+
+.navbar-user {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+}
+
+.navbar-user:hover .navbar-user-menu {
+    display: flex;
+}
+
+.navbar-user-name {
+    margin-right: 5px;
+}
+
+.navbar-user-avatar {
+    height: 50px;
+    width: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.navbar-user-menu {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    box-shadow: 0px 0px 10px 5px black;
+    border-radius: 5px;
+    width: 200px;
+    z-index: 100;
+    position: absolute;
+    top: 100%;
+    display: none;
+}
+
+.navbar-user-menu-item {
+    border-bottom: 1px solid #ccc;
+    font-size: 16px;
+    line-height: 20px;
+    padding: 10px;
+    color: black;
+}
+
+.navbar-user-menu-item:hover {
+    background-color: #ccc;
+    text-decoration: none;
+    color: black;
+}
+
+.navbar-user-menu-item:first-child:hover {
+    background-color: #ccc;
+    border-radius: 5px 5px 0px 0px;
+}
+
+.navbar-user-menu-item:last-child {
+    border-bottom: none;
+}
+
+.navbar-user-menu-item:last-child:hover {
+    background-color: #ccc;
+    border-radius: 0px 0px 5px 5px;
+}
+
+.navbar-login-regis {
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+.navbar-login,
+.navbar-register {
+    color: white;
+}
+
+.navbar-login {
+    margin-right: 10px;
+}
+
+.navbar-login:hover,
+.navbar-register:hover {
+    color: black;
+    text-decoration: none;
+}

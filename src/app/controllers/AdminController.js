@@ -1,4 +1,5 @@
 const Comic = require('../models/Comic')
+const User = require('../models/User')
 const { mutipleMongooseToObject, mongooseToObject } = require('../../util/mongoose')
 const { json } = require('express')
 const cheerio = require('cheerio')
@@ -10,12 +11,11 @@ class AdminController {
         Comic.find().sort({updateAt: -1})
             .then((comics) => {
                 const lengthListComics = comics.length
-                
                 if(req.query.page == null) {
                     return res.render('admin/admin', {
                         comics: mutipleMongooseToObject(comics.slice(0, 9)),
                         layout: 'adminLayout',
-                        name: 'hao',
+                        name: `${req.session.userName}`,
                         lengthListComics,
                     })
                 }else {
@@ -25,7 +25,7 @@ class AdminController {
                     return res.render('admin/admin', {
                         comics: mutipleMongooseToObject(comics.slice(startFrom, end)),
                         layout: 'adminLayout',
-                        name: 'hao',
+                        name: `${req.session.userName}`,
                         lengthListComics,
                     })
                 }
@@ -39,7 +39,11 @@ class AdminController {
         var message = ""
         if(req.body.name == "" || req.body.urlImage == "" || req.body.author == "" || req.body.content == "") {
             message = "Empty value! Please input value again!"
-            return res.redirect(req.get('referer'))
+            return res.render('admin/create', {
+                layout: 'adminLayout',
+                name: `${req.session.userName}`,
+                message
+            })
         }
         else {
             const comic = new Comic(req.body)
@@ -147,6 +151,7 @@ class AdminController {
                 res.render('admin/edit', {
                     comic: mongooseToObject(comic),
                     layout: 'adminLayout',
+                    name: `${req.session.userName}`,
                 })
             })
             .catch(() => {
@@ -303,7 +308,7 @@ class AdminController {
     createComic(req, res, next) {
         return res.render('admin/create', {
             layout: 'adminLayout',
-            name: 'hao',
+            name: `${req.session.userName}`,
         })
     }
 }

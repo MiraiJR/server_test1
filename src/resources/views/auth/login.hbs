@@ -2,8 +2,13 @@
     <div class="row">
         <div class="col-12 col-lg-12 col-xl-12">
             <div id="secure-login">
-                <form method="POST" id="secure-login-main" action="/secure/login/userLogin">
+                <form method="POST" id="secure-login-main">
                     <h1>Đăng nhập</h1>
+                    {{#if message}}
+                        <div class="alert alert-danger">
+                            <strong>Error!</strong> {{message}}
+                        </div>
+                    {{/if}}
                     <div class="form-group">
                         <label for="username" style="font-weight: 500;">Tên đăng nhập</label>
                         <input type="text" class="form-control" id="username" name="username" placeholder="Tên đăng nhập">
@@ -12,7 +17,10 @@
                         <label for="password" style="font-weight: 500;">Mật khẩu</label>
                         <input type="password" class="form-control" id="password" name="password" placeholder="Mật khẩu">
                     </div>
-                    <button type="submit" class="btn btn-primary">Đăng nhập</button>
+                    <a class="secure-link-register" href="/register">
+                        Đăng ký
+                    </a>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; padding: 15px;">Đăng nhập</button>
                 </form>
             </div>
         </div>
