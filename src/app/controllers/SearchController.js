@@ -1,4 +1,4 @@
-const Comic = require('../models/Comic')
+var User = require("../models/User")
 const { mutipleMongooseToObject } = require('../../util/mongoose');
 
 class SiteController {
