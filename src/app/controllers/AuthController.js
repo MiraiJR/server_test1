@@ -1,4 +1,4 @@
-const User = require('../models/User')
+var User = require('../models/User')
 
 class AuthController {
     loginPage(req, res, next) {
