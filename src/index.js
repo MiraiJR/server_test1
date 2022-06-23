@@ -16,10 +16,7 @@ db.connectDB()
 const app = express()
 
 // cấu hình sử dụng file tinh
-app.use('/secure/login' ,express.static(__dirname + '/public'))
-app.use('/secure' ,express.static(__dirname + '/public'))
 app.use('/admin/:_id', express.static(__dirname + '/public'))
-app.use('/admin', express.static(__dirname + '/public'))
 app.use('/comic/:slug/:number', express.static(__dirname + '/public'))
 app.use('/comic/:slug', express.static(__dirname + '/public'))
 app.use('/comic', express.static(__dirname + '/public'))

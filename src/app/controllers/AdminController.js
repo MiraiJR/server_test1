@@ -126,11 +126,9 @@ class AdminController {
                                         }
                                     })
                                     .catch((error) => {
-                                        console.log(error)
                                         return res.render('error/error')
                                     })
                             } catch (error) {
-                                console.log(error);
                                 res.sendStatus(500);
                                 return
                             }
@@ -139,7 +137,6 @@ class AdminController {
                         .catch(next)
                 })
                 .catch((error) => {
-                    console.log(error)
                     return res.render('error/error')
                 })
         }
@@ -191,7 +188,6 @@ class AdminController {
                             }
                         })
                         .catch(error => {
-                            console.log(error)
                         })
                     } catch (error) {
                         alert(error)
@@ -292,11 +288,9 @@ class AdminController {
                             }
                         })
                         .catch((error) => {
-                            console.log(error)
                             return res.render('error/error')
                         })
                 } catch (error) {
-                    console.log(error);
                     res.sendStatus(500);
                     return
                 }

@@ -8,7 +8,6 @@ class AuthController {
             }
             return res.render('auth/login')
         } catch (error) {
-            console.log(error)
             return res.render('error/error')
         }
     }
@@ -20,7 +19,6 @@ class AuthController {
             }
             return res.render('auth/register')
         } catch (error) {
-            console.log(error)
             return res.render('error/error')
         }
     }
@@ -59,7 +57,6 @@ class AuthController {
                     }
                 })
         } catch (error) {
-            console.log(error)
             return res.render('error/error')
         }
     }
@@ -125,7 +122,6 @@ class AuthController {
                     }
                 })
         } catch (error) {
-            console.log(error)
             return res.render('error/error')
         }
     }

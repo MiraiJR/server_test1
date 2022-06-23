@@ -16,7 +16,6 @@ class SiteController {
     
     updateHistory(req, res, next) {
         req.session.comic = req.body
-        console.log(req.session.comic)
         return res.json(req.session.comic)
     }
 

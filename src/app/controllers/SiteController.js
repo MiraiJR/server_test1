@@ -33,7 +33,6 @@ class SiteController {
                     })
             })
             .catch((error) => {
-                console.log(error)
                 res.render('error/error')
             })
     }

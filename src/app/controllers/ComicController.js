@@ -30,8 +30,6 @@ class ComicController {
 
                 const continueReading = req.session.comic.find(element => element.comic == req.params.slug).curChapterReading
 
-                console.log(continueReading)
-
                 try {
                     if(req.session.userId == null) {
                         return res.render('comic/showComic', {
@@ -51,12 +49,10 @@ class ComicController {
                             })
                     }
                 } catch (error) {
-                    console.log(error)
                     return res.render('error/error')
                 }
             })
             .catch((error) => {
-                console.log(error)
                 return res.render('error/error')
             })
     }
@@ -128,12 +124,10 @@ class ComicController {
                         }
                     })
                 } catch (error) {
-                    console.log(error)
                     return res.render('error/error')
                 }
             })
             .catch((error) => {
-                console.log(error)
                 return res.render('error/error')
             })
     }
