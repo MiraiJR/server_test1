@@ -1,5 +1,5 @@
 const Comic = require('../models/Comic')
-var User = require("../models/User")
+var User = require("../models/User.js")
 const { mutipleMongooseToObject, mongooseToObject } = require('../../util/mongoose')
 const { json } = require('express')
 const cheerio = require('cheerio')

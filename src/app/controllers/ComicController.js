@@ -1,5 +1,5 @@
 const Comic = require('../models/Comic')
-var User = require("../models/User")
+var User = require("../models/User.js")
 const { mongooseToObject, mutipleMongooseToObject } = require('../../util/mongoose');
 const axios = require('axios')
 const cheerio = require('cheerio')
