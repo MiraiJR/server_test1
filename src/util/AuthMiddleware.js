@@ -1,4 +1,4 @@
-const User = require('../app/models/User')
+const User = require('../app/models/UserT.js')
 
 module.exports = {
     requireAuth: function(req, res, next) {

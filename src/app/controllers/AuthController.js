@@ -1,4 +1,4 @@
-var User = require("../models/User.js")
+var User = require("../models/UserT.js")
 
 class AuthController {
     loginPage(req, res, next) {

@@ -1,4 +1,4 @@
-var User = require("../models/User.js")
+var User = require("../models/UserT.js")
 const Comic = require('../models/Comic')
 const { mutipleMongooseToObject, mongooseToObject } = require('../../util/mongoose');
 
