@@ -1,3 +1,5 @@
+const Comic = require('../models/Comic')
+
 class SiteController {
     async search(req, res, next) {
         let payload = req.body.payload.trim()
