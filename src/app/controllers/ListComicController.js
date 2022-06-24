@@ -1,5 +1,5 @@
-const Comic = require('../models/Comic')
 var User = require("../models/User.js")
+const Comic = require('../models/Comic')
 const { mutipleMongooseToObject, mongooseToObject } = require('../../util/mongoose');
 
 class ListComicController {

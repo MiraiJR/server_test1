@@ -1,5 +1,5 @@
-const Comic = require('../models/Comic')
 var User = require("../models/User.js")
+const Comic = require('../models/Comic')
 const { mutipleMongooseToObject, mongooseToObject } = require('../../util/mongoose');
 
 class SiteController {
@@ -11,7 +11,7 @@ class SiteController {
                 arrayComic.push(element.comic)
             });
         }
-        
+
         Comic.find({}).sort({updateAt: -1})
             .then((comics) => {
                 Comic.find({slug: {$in: arrayComic}})

@@ -1,6 +1,3 @@
-var User = require("../models/User.js")
-const { mutipleMongooseToObject } = require('../../util/mongoose');
-
 class SiteController {
     async search(req, res, next) {
         let payload = req.body.payload.trim()
