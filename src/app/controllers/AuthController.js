@@ -92,7 +92,7 @@ class AuthController {
                 })
             }
 
-            Comic.find({username: req.body.username})   
+            User.find({username: req.body.username})   
                 .then((user) => {
                     if(user == null) {
                         message = "The username which you used existed! Please use another username!"
