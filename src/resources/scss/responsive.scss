@@ -4,7 +4,7 @@
     }
 }
 
-@media (max-width: 590px) {
+@media (max-width: 992px) {
     .navbar {
         display: flex;
         align-items: center;
@@ -28,6 +28,31 @@
     }
 
     .navbar-history > span {
+        display: none;
+    }
+
+    .navbar-login-regis {
+        padding: 10px 0;
+    }
+
+    .navbar-login,
+    .navbar-register {
+        padding: 0 10px;
+    }
+}
+
+@media (max-width: 600px) {
+    .admin-setting-account-item > a {
+        text-align: center;
+    }
+
+    .admin-setting-account-item > span {
+        display: none;
+    }
+}
+
+@media (max-width: 450px) {
+    .admin-navbar-menu > a > span {
         display: none;
     }
 }

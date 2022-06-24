@@ -12,15 +12,19 @@ module.exports = {
                 if(user == null) {
                     return res.redirect('/login')
                 }
-    
-                if(user.type == 'user') {
-                    return res.redirect('/me')
-                } else if (user.type == 'admin') {
-                    return res.redirect('/admin')
-                }
                 
                 next()
             })
     },
+    authAdmin(req, res, next) {
+        User.findOne({_id: req.session.userId})
+            .then((user) => {
+                if(user.type != 'admin') {
+                    return res.redirect('/')
+                }
+
+                next()
+            })
+    }
 
 }

@@ -53,7 +53,7 @@ class AuthController {
                     if(user.type == 'admin') {
                         return res.redirect('/admin/library-comic')
                     } else if(user.type == 'user') {
-                        return res.redirect('/me')
+                        return res.redirect('/')
                     }
                 })
         } catch (error) {
