@@ -21,7 +21,7 @@ function route(app) {
     app.use('/list-comic', listComicRouter)
     app.use('/genre', genreRouter)
     app.use('/comic', comicRouter)
-    app.use('/admin', authMw.authAdmin, authMw.requireAuth, adminRouter)
+    app.use('/admin', authMw.requireAuth, authMw.authAdmin, adminRouter)
     app.use('/', siteRouter)
     app.use('*', (req, res) => {
         return res.render('error/error')
