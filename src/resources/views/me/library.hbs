@@ -1,0 +1,77 @@
+<div class="library-comic">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col" style="background-color: #ccc; border-right: 0.5px solid black;">Danh sách truyện yêu thích</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each (limit comics 9)}}
+            <tr id="comics-{{sum @index 1}}" class="row">
+                <td class="col-2" style="border-right: 0.5px solid black;">
+                    <img style="display: block; width: 100%; height: 300px; object-fit: cover;" src="{{this.urlImage}}" alt="">
+                </td>
+                <td class="col-6" style="border-right: 0.5px solid black;">{{this.name}}</td>
+                <td class="col-4">
+                    <button onclick="delComic(`{{this.slug}}`, `{{@index}}`)" class="btn btn-danger btn-link">Xóa</button>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
+
+<div class="pagination-list-comic col-12 col-lg-12 col-xl-12">
+    <ul class="pagination">
+        <li class="page-item">
+            <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+            </a>
+        </li>
+        {{#each (listNumerForPagination lengthListComics 9)}}
+        <li id="page-{{this}}" class="page-item"><a class="page-link" href="?page={{this}}">{{this}}</a></li>
+        {{/each}}
+        <li class="page-item">
+            <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+            </a>
+        </li>
+    </ul>
+</div>
+
+<form name="update-comic-form" method="POST" action=""></form>
+
+<script>
+    (function colorColumnInTable() {
+        const list = document.querySelectorAll('tbody > tr')
+        for(let i = 0; i < list.length; i++) {
+            var idIndex = list[i].id.split('comics-')[1]
+            if(idIndex % 2 == 0) {
+                document.getElementById(`${list[i].id}`).style.backgroundColor = '#ccc'
+            }
+        }
+    })()
+
+    async function delComic(slug, index) {
+        if(confirm('Bạn có muốn xóa truyện này ra khỏi danh sách yêu thích?'))
+        {
+            index = Number(index) + 1
+            const delElement = document.getElementById(`comics-${index}`)
+            delElement.remove()
+            const comic = {}
+            comic.slug = slug
+
+            await fetch('/getComic/favouriteComicRemove', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(comic)
+            })
+
+            location.reload()
+        }
+    }
+</script>

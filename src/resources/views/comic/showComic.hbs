@@ -32,6 +32,13 @@
 
                                 </span>
                             </div>
+                            <div class="comic-detail-item">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <i  onclick="addFavouriteComic(this)" class="fas fa-heart favourite-comic" style="cursor: pointer;"></i>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -163,4 +170,76 @@
             })
     }
     countViewPage()
+
+    async function favouriteComicActive() {
+        await fetch('/getComic/favouriteComic', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+        .then(res => res.text())
+        .then((data) => {
+            const slugComic = window.location.href.split('/')[4]
+            if(data.includes(slugComic)) {
+                document.querySelector('.favourite-comic').style.color = 'red'
+            }
+        })
+
+    }
+    favouriteComicActive()
+
+    async function addFavouriteComic(item) {
+        await fetch('/getComic/user', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+        .then(res => res.json())
+        .then(async (data) => {
+            if(!data) {
+                alert("Vui lòng đăng nhập để thực hiện tính năng này!")
+            }else {
+                if(document.querySelector('.favourite-comic').style.color == "red") {
+                    const comic = {}
+                    comic.slug = window.location.href.split('/')[4]
+
+                    await fetch('/getComic/favouriteComicRemove', {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(comic)
+                    })
+                    .then(res => res.json())
+                    .then((data) => {
+                        alert("Ban đã hủy yêu thích truyện " + data)
+                    })
+
+                    item.style.color = "white"
+                }else {
+                    const comic = {}
+                    comic.slug = window.location.href.split('/')[4]
+
+                    await fetch('/getComic/favouriteComic', {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(comic)
+                    })
+                    .then(res => res.json())
+                    .then((data) => {
+                        alert("Ban đã thêm truyện này vào danh sách yêu thích truyện " + data)
+                    })
+
+                    item.style.color = "red"
+                }
+            }
+        })       
+        .catch((Error) => {
+            alert("Vui lòng đăng nhập để thực hiện tính năng này!")
+        })
+    }
 </script>

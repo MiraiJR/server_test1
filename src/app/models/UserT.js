@@ -6,6 +6,7 @@ const User = new Schema({
     password: {type: String},
     email: {type: String},
     type: {type: String, default: 'user'},
+    libraryComic: {type: [String], default: []}
 });
 
 module.exports = mongoose.model('User', User)

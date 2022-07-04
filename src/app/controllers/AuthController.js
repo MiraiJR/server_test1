@@ -49,7 +49,6 @@ class AuthController {
                     }
 
                     req.session.userId = user._id
-                    req.session.userName = user.username
                     if(user.type == 'admin') {
                         return res.redirect('/admin/library-comic')
                     } else if(user.type == 'user') {

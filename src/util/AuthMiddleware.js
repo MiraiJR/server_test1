@@ -19,9 +19,13 @@ module.exports = {
     authAdmin(req, res, next) {
         User.findOne({_id: req.session.userId})
             .then((user) => {
+                if(user) {
+                    
+                }
                 if(user.type != 'admin') {
                     return res.redirect('/')
                 }
+
 
                 next()
             })

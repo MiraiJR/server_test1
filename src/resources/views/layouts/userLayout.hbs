@@ -58,6 +58,20 @@
                             {{name}}
                         </div>
                         <img class="admin-navbar-user-avatar" src="https://images.squarespace-cdn.com/content/v1/54b7b93ce4b0a3e130d5d232/1519987020970-8IQ7F6Z61LLBCX85A65S/icon.png?format=1000w"></img>
+                        <ul class="navbar-user-menu">
+                            <a href="/me" class="navbar-user-menu-item">
+                                <i class="fas fa-user    "></i>
+                                Trang cá nhân
+                            </a>
+                            <a href="/me/library" class="navbar-user-menu-item">
+                                <i class="fas fa-heart    "></i>
+                                Truyện yêu thích
+                            </a>
+                            <li onclick="event.preventDefault(); document.getElementById('form-logout').submit();" class="navbar-user-menu-item">
+                                <i class="fas fa-outdent    "></i>
+                                Đăng xuất
+                            </li>
+                        </ul>
                     </div>
                     
                 </div>
@@ -73,9 +87,20 @@
         </div>
     </div>
 
+    <form method="POST" id="form-logout" action="/logout" style="display: none;"></form>
+
     <script>
         (function activeNagivation() {
-            const id = window.location.href.split('/')[3]
+            var id
+
+            if(window.location.href[window.location.href.length - 1] == '/') {
+                id = window.location.href.slice(0, -1).split('/')
+                id = id[id.length - 1]
+            }else {
+                id = window.location.href.split('/')
+                id = id[id.length - 1]
+            }
+
             document.getElementById(`${id}`).classList.add('active-navigation')
         })()
 
