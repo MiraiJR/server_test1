@@ -36,7 +36,9 @@ class SiteController {
     favouriteComic(req, res, next) {
         User.findOne({_id: req.session.userId})
         .then((user)=> {
-            return res.json(user.libraryComic)
+            if(user) {
+                return res.json(user.libraryComic)
+            }
         })
     }
 

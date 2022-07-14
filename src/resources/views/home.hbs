@@ -64,7 +64,7 @@
                                         {{this.detailChapter.0.name}}
                                     </a>
                                     <div class="comic-item-chapterDetail-father">
-                                        {{#each this.detailChapter}}
+                                        {{#each (getnEleFromArray this.detailChapter 4)}}
                                             <a href="/comic/{{this.slugComic}}/{{this.slugChapter}}" class="comic-item-chapterDetail">
                                                 {{this.name}}
                                             </a>
@@ -96,7 +96,7 @@
                                         {{this.detailChapter.0.name}}
                                     </a>
                                     <div class="comic-item-chapterDetail-father">
-                                        {{#each this.detailChapter}}
+                                        {{#each (getnEleFromArray this.detailChapter 4)}}
                                             <a href="/comic/{{this.slugComic}}/{{this.slugChapter}}" class="comic-item-chapterDetail">
                                                 {{this.name}}
                                             </a>
@@ -153,7 +153,6 @@
     import Swiper from 'https://unpkg.com/swiper@8/swiper-bundle.esm.browser.min.js'
 
     var widthScreen = window.screen.width
-    console.log(widthScreen)
 
     if(widthScreen >= 1024) {
         const swiper = new Swiper(".mySwiper", {

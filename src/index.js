@@ -88,6 +88,9 @@ app.engine(
                     return true
                 }
             },
+            getnEleFromArray: (array, n) => {
+                return array.slice(0, n)
+            },
         } 
     }),
 )
