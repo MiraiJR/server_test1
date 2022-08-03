@@ -72,9 +72,12 @@ li {
     position: relative;
 }
 
-.admin-navbar-user-avatar {
+#admin-navbar-user-avatar {
     width: 30px;
-    border-radius: 50%;
+    height: 30px;
+    object-fit: cover;
+    border-radius: 100%;
+    margin-left: 10px;
 }
 
 .admin-navbar-menu > i {

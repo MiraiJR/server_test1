@@ -31,6 +31,30 @@ class MeController {
                 })
             })
     }
+
+    uploadImage(req, res, next) {
+        const file = req.file
+        
+        if (!file) {
+            const error = new Error('Please upload a file')
+            error.httpStatusCode = 400
+            return next(error)
+        }
+
+        return res.json(`/image/uploads/${file.filename}`)
+    }
+
+
+    changeAvatarUser(req, res, next) {
+        const linkImage = req.body.linkImage
+
+        User.updateOne({_id: req.session.userId}, {
+            $set: {avatar: linkImage}
+        })
+        .then(() => {
+            return res.send('success')
+        })
+    }
 }
 
 module.exports = new MeController()

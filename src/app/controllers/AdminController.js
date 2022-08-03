@@ -1,4 +1,5 @@
 const Comic = require('../models/Comic')
+const User = require('../models/UserT')
 const { mutipleMongooseToObject, mongooseToObject } = require('../../util/mongoose')
 const { json } = require('express')
 const cheerio = require('cheerio')
@@ -11,21 +12,32 @@ class AdminController {
             .then((comics) => {
                 const lengthListComics = comics.length
                 if(req.query.page == null) {
-                    return res.render('admin/admin', {
-                        comics: mutipleMongooseToObject(comics.slice(0, 9)),
-                        layout: 'adminLayout',
-                        name: `${req.session.userName}`,
-                        lengthListComics,
+
+                    User.findOne({_id: req.session.userId})
+                    .then((user) => {
+                        return res.render('admin/admin', {
+                            comics: mutipleMongooseToObject(comics.slice(0, 9)),
+                            layout: 'adminLayout',
+                            name: `${req.session.userName}`,
+                            lengthListComics,
+                            user: mongooseToObject(user),
+                        })
                     })
                 }else {
                     const curPage = req.query.page
                     const startFrom = 9*(curPage - 1)
                     const end = 9*(curPage)
-                    return res.render('admin/admin', {
-                        comics: mutipleMongooseToObject(comics.slice(startFrom, end)),
-                        layout: 'adminLayout',
-                        name: `${req.session.userName}`,
-                        lengthListComics,
+
+                    console.log(req.session.userId)
+                    User.findOne({_id: req.session.userId})
+                    .then((user) => {
+                        return res.render('admin/admin', {
+                            comics: mutipleMongooseToObject(comics.slice(startFrom, end)),
+                            layout: 'adminLayout',
+                            name: `${req.session.userName}`,
+                            lengthListComics,
+                            user: mongooseToObject(user),
+                        })
                     })
                 }
             })

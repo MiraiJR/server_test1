@@ -1,8 +1,11 @@
 <div class="user">
     <div class="user-header">
-        <img class="user-cover-image" src="/image/bg_repeat.jpg" alt="">
+        <img id="user-cover-image" src="/image/bg_repeat.jpg" alt="">
         <div class="user-header-extra">
-            <img class="user-avatar" src="https://truyentranhlh.net/storage/images/thumb/7a1394bd-6889-4ff3-a130-14e5418f929c.jpg" alt="">
+            <div onclick="showDialogBoxUploadFile()" id="user-replace-avt">
+                <i class="fa-solid fa-camera"></i>
+            </div>
+            <img id="user-avatar" src="{{user.avatar}}" alt="">
             <div class="user-nickname-type">
                 <div class="user-nickname">{{user.username}}</div>
                 <div class="user-type">{{user.type}}</div>
@@ -11,3 +14,16 @@
         <div class="user-padding-bg-white"></div>
     </div>
 </div>
+
+
+<div id="dialog-box-upload-file">
+    <form id="dialog-box-upload-file-form">
+        <div class="form-group">
+            <input id="dialog-box-upload-file-data" type="file" class="form-control-file" name="user_avatar">
+            <input id="dialog-box-upload-file-submit" type="submit" value="Upload" class="btn btn-primary">            
+        </div>
+    </form>
+    <img id="user-avatar-preview" src="{{user.avatar}}" alt="">
+</div>
+
+<script src="./js/me.js"></script>

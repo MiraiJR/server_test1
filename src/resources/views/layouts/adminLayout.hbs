@@ -59,9 +59,9 @@
 
                     <div class="admin-navbar-user">
                         <div class="admin-navbar-user-name">
-                            {{name}}
+                            {{user.username}}
                         </div>
-                        <img class="admin-navbar-user-avatar" src="https://images.squarespace-cdn.com/content/v1/54b7b93ce4b0a3e130d5d232/1519987020970-8IQ7F6Z61LLBCX85A65S/icon.png?format=1000w"></img>
+                        <img id="admin-navbar-user-avatar" src="{{user.avatar}}"></img>
                         <ul class="navbar-user-menu">
                             <a href="/me" class="navbar-user-menu-item">
                                 <i class="fas fa-user    "></i>
@@ -92,27 +92,7 @@
 
     <form method="POST" id="form-logout" action="/logout" style="display: none;"></form>
 
-    <script>
-        (function activeNagivation() {
-            const id = window.location.href.split('/')[4]
-            document.getElementById(`${id}`).classList.add('active-navigation')
-        })()
-
-        var appearNavigation = 0
-        function disappearNavigation() {
-            appearNavigation++
-            const element = document.querySelector('.admin-navbar')
-            if(appearNavigation % 2 != 0) {
-                document.querySelector('.admin-navigation').style.display = 'none'
-                element.parentElement.classList.replace('col-10', 'col-12')
-            }else {
-                document.querySelector('.admin-navigation').style.display = 'block'
-                element.parentElement.classList.replace('col-12', 'col-10')
-
-            }
-        }
-
-    </script>
+    <script src="./js/adminHandle.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
